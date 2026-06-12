@@ -8,6 +8,7 @@ on:
   workflow_dispatch:
 
 env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   SWR_REGISTRY: swr.cn-north-4.myhuaweicloud.com
   SWR_NAMESPACE: cloud-compute-2026
   BACKEND_IMAGE: backend
