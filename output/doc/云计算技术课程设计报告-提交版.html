@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>云计算技术课程设计报告</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">云计算技术课程设计报告</h1>
+</header>
+<h1 id="云计算技术课程设计报告">云计算技术课程设计报告</h1>
+<p>课程名称：云计算技术<br />
+课程代码：SCAI004712<br />
+学号：2023112573<br />
+姓名：张春冉<br />
+班级：软件工程2023-02班<br />
+队友：2023112551 邓苏鑫<br />
+完成日期：2026年6月12日</p>
+<h2 id="一华为云环境信息">一、华为云环境信息</h2>
+<p>本课程设计使用华为云华北-北京四区域，Region 为
+<code>cn-north-4</code>。实验使用 CCE Standard 集群
+<code>cloud-compute-cce</code>，Worker 节点 2 台，Kubernetes 版本为
+<code>v1.34.6-r0-34.0.23</code>，满足任务书要求的 1.27
+及以上版本。镜像仓库使用 SWR 组织
+<code>cloud-compute-2026</code>，主要镜像包括
+<code>backend:v1</code>、<code>frontend:v1</code> 和
+<code>mpi4py:latest</code>。</p>
+<figure>
+<img src="report/final-assets/01-cce-cluster-services.png"
+alt="图1 CCE 集群、Service、PVC、HPA 状态" />
+<figcaption aria-hidden="true">图1 CCE 集群、Service、PVC、HPA
+状态</figcaption>
+</figure>
+<h2 id="二第一部分云计算平台搭建">二、第一部分：云计算平台搭建</h2>
+<h3 id="应用容器化">2.1 应用容器化</h3>
+<p>本实验实现了 Flask API + Redis + Nginx 静态前端的两层 Web
+应用。后端提供 <code>/api/ping</code>、<code>/api/count</code> 和
+<code>/api/httpbin</code> 接口，其中 <code>/api/ping</code> 会访问 Redis
+并返回 <code>status=ok</code>、学生姓名、时间和 Redis
+连接状态。<code>requirements.txt</code> 中除 Flask、Redis
+客户端外，额外加入 <code>requests==2.32.3</code>，满足“至少加入 1 个自选
+Python 包”的要求。前端首页包含
+<code>2023112573 张春冉</code>，可用于验收识别。</p>
+<p>后端 Dockerfile 采用多阶段构建，先在 builder
+阶段安装依赖，再复制到运行镜像，避免把构建工具带入最终镜像。前端镜像基于
+<code>nginx:1.25-alpine</code>，复制 <code>nginx.conf</code>
+和静态页面。由于本机为 Apple Silicon，而 CCE Worker 为 amd64，推送 SWR
+时使用
+<code>docker buildx build --platform linux/amd64 --provenance=false --sbom=false --push</code>，保证镜像架构正确，同时避免
+SWR 对 BuildKit provenance manifest 的解析问题。</p>
+<p>本地联调用 Docker Compose 启动 backend、frontend、redis
+三个容器。宿主机 5000 端口被占用，因此后端映射为
+<code>5001:5000</code>，容器内部端口和前端反向代理仍然保持
+5000。联调结果显示前端 Nginx 访问 <code>/api/ping</code> 能返回 Redis
+connected，后端日志中也出现对应 GET 请求。</p>
+<figure>
+<img src="report/final-assets/13-compose-local.png"
+alt="图2 Docker Compose 本地联调" />
+<figcaption aria-hidden="true">图2 Docker Compose 本地联调</figcaption>
+</figure>
+<figure>
+<img src="report/final-assets/07-mpi-image-push.png"
+alt="图3 MPI 镜像构建与推送到 SWR" />
+<figcaption aria-hidden="true">图3 MPI 镜像构建与推送到 SWR</figcaption>
+</figure>
+<h3 id="cce-集群搭建">2.2 CCE 集群搭建</h3>
+<p>CCE 集群已经通过本地 kubeconfig
+连接验证。<code>kubectl get nodes -o wide</code> 输出中两个 Worker
+节点均为 Ready，版本列显示
+<code>v1.34.6-r0-34.0.23</code>。这说明集群版本、节点数量和节点状态都满足任务书要求。</p>
+<h3 id="应用部署">2.3 应用部署</h3>
+<p>K8s 资源文件位于 <code>k8s/</code> 目录。后端 Deployment 设置
+<code>replicas: 2</code>，包含 CPU/内存 requests 与 limits，通过
+<code>envFrom</code> 引用 <code>backend-config</code> 中的 Redis
+地址，通过 <code>secretKeyRef</code> 引用 Redis 密码。Redis Deployment
+设置 1 个副本，内存 limit 为 512Mi，并挂载 PVC。后端 Service 为
+LoadBalancer，带有华为云 ELB 自动创建注解；Redis Service 为
+ClusterIP，仅供集群内部访问。前端也通过 LoadBalancer
+暴露公网访问入口。</p>
+<p>实际部署中遇到过两个问题：第一，Pod 拉取 SWR
+镜像时最初出现认证问题，解决办法是在 Deployment 中加入
+<code>imagePullSecrets: default-secret</code>；第二，LoadBalancer
+Service 曾处于 pending，原因是缺少华为云 ELB 创建参数，补充
+<code>kubernetes.io/elb.autocreate</code> 后公网 IP
+正常生成。当前后端公网 IP 为 <code>1.92.103.90</code>，前端公网 IP 为
+<code>119.3.252.161</code>。</p>
+<figure>
+<img src="report/final-assets/06-frontend-ui.png"
+alt="图4 前端页面访问和 API 返回" />
+<figcaption aria-hidden="true">图4 前端页面访问和 API 返回</figcaption>
+</figure>
+<h3 id="持久化存储">2.4 持久化存储</h3>
+<p>Redis 使用 PVC <code>redis-data-pvc</code>，存储类为
+<code>csi-disk</code>，容量 10Gi，状态为 Bound。验证步骤为：先在 Redis
+中写入 <code>testkey=hello</code>，再删除当前 Redis Pod，等待 Deployment
+自动创建新 Pod，最后重新读取 <code>testkey</code>。重建后仍然返回
+<code>hello</code>，说明 Redis 的 <code>/data</code> 目录已经由 PVC
+持久化，不依赖单个 Pod 生命周期。</p>
+<figure>
+<img src="report/final-assets/02-redis-persistence.png"
+alt="图5 Redis PVC 持久化验证" />
+<figcaption aria-hidden="true">图5 Redis PVC 持久化验证</figcaption>
+</figure>
+<h3 id="configmap-volume-挂载">2.5 ConfigMap Volume 挂载</h3>
+<p>Nginx 反向代理配置保存在 ConfigMap <code>frontend-nginx-conf</code>
+中，并通过 Volume 挂载到
+<code>/etc/nginx/conf.d/default.conf</code>。实际文件中可看到：<code>proxy_pass http://backend-svc:80/api/;</code>，说明前端容器读取的是
+ConfigMap 文件内容，而不是镜像内固定配置。</p>
+<p>Volume 挂载适合 Nginx
+配置、证书、应用配置文件等以文件形式存在的配置；<code>envFrom</code>
+更适合主机名、端口、环境标识这类键值型配置。本实验中后端用
+<code>envFrom</code> 读取 Redis 地址和端口，前端用 ConfigMap Volume 挂载
+Nginx 配置，两者用途不同。</p>
+<figure>
+<img src="report/final-assets/03-configmap-volume.png"
+alt="图6 ConfigMap Volume 挂载验证" />
+<figcaption aria-hidden="true">图6 ConfigMap Volume
+挂载验证</figcaption>
+</figure>
+<h3 id="hpa-弹性伸缩">2.6 HPA 弹性伸缩</h3>
+<p>后端 Deployment 配置
+HPA，<code>minReplicas=1</code>，<code>maxReplicas=4</code>，目标 CPU
+利用率 60%。集群最初没有 Metrics API，因此先安装
+metrics-server，并将镜像改为华为云可拉取的镜像地址。<code>kubectl top nodes</code>、<code>kubectl top pods</code>
+有数据后，用 CPU 压力和 <code>ab</code> 请求压测后端 API。压测期间 HPA
+监测到 CPU 利用率高于目标值，副本数从 1 增加到
+4；停止压测并等待稳定窗口后，多余 Pod 进入 Terminating，最终缩回 1
+个副本。</p>
+<figure>
+<img src="report/final-assets/04a-hpa-scale-up.png"
+alt="图7 HPA 扩容过程" />
+<figcaption aria-hidden="true">图7 HPA 扩容过程</figcaption>
+</figure>
+<figure>
+<img src="report/final-assets/04b-hpa-scale-down.png"
+alt="图8 HPA 缩容过程" />
+<figcaption aria-hidden="true">图8 HPA 缩容过程</figcaption>
+</figure>
+<p>HPA 扩容存在延迟，主要原因是 metrics-server 有采集周期，HPA
+控制器也按固定间隔评估指标。缩容更慢，是因为 Kubernetes
+需要稳定窗口避免短时间流量波动造成副本频繁增删。对于云平台，HPA
+的价值在于低负载时减少副本占用，高负载时自动补充处理能力，从而兼顾成本和可用性。</p>
+<h2 id="三第二部分mpi-并行科学计算">三、第二部分：MPI 并行科学计算</h2>
+<h3 id="mpi-环境部署">3.1 MPI 环境部署</h3>
+<p>本项目选择方向 B：MPI 并行科学计算。已经在 CCE 中部署 MPI
+Operator，并使用 <code>MPIJob</code> 提交 mpi4py 作业。MPI 镜像基于
+<code>python:3.12-slim</code>，安装 OpenMPI、mpi4py 和
+openssh-server。由于 MPI Operator 通过 SSH 启动 worker 进程，镜像中开启
+<code>PermitRootLogin yes</code>、<code>PubkeyAuthentication yes</code>，并设置
+<code>StrictModes no</code>，避免 Secret 挂载的 SSH key 权限被 sshd
+拒绝。</p>
+<p><code>mpi/mpijob.yaml</code> 使用
+<code>kubeflow.org/v2beta1</code>，设置
+<code>slotsPerWorker: 2</code>、Worker 副本数 2。开始时 Launcher 曾因
+hostfile 参数和 DNS 时序失败，最终通过显式指定
+<code>--hostfile /etc/mpi/hostfile</code>、<code>--mca plm_rsh_args</code>，并设置
+<code>launcherCreationPolicy: WaitForWorkersReady</code>
+解决。最终日志输出
+<code>mpi_blocking p=4 n=10000000 pi=3.1415926536</code>，MPIJob 状态为
+Succeeded。</p>
+<figure>
+<img src="report/final-assets/05-mpi-job-success.png"
+alt="图9 MPIJob 云端运行结果" />
+<figcaption aria-hidden="true">图9 MPIJob 云端运行结果</figcaption>
+</figure>
+<h3 id="并行算法实现">3.2 并行算法实现</h3>
+<p>算法选择数值积分。串行版使用中点公式计算函数 <code>4/(1+x*x)</code>
+在 <code>[0,1]</code> 上的积分，结果近似 π。MPI 阻塞版中，rank 0
+根据进程数切分区间，并通过 <code>comm.scatter</code>
+把每个子区间发送给对应进程；每个进程计算自己的 <code>local_sum</code>
+后，通过 <code>comm.reduce(local_sum, op=MPI.SUM, root=0)</code> 汇总到
+rank 0。非阻塞版同样使用 <code>scatter</code> 分发区间，汇总阶段改为
+rank 0 先 <code>Irecv</code>，其他进程 <code>Isend</code>，最后
+<code>Waitall</code> 后累加结果。</p>
+<figure>
+<img src="report/final-assets/10-mpi-communication-diagram.png"
+alt="图10 MPI 通信模式示意图" />
+<figcaption aria-hidden="true">图10 MPI 通信模式示意图</figcaption>
+</figure>
+<p>阻塞版核心代码如下：</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpi4py <span class="im">import</span> MPI</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">4.0</span> <span class="op">/</span> (<span class="fl">1.0</span> <span class="op">+</span> x <span class="op">*</span> x)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>comm <span class="op">=</span> MPI.COMM_WORLD</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>rank <span class="op">=</span> comm.Get_rank()</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> comm.Get_size()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">int</span>(sys.argv[<span class="dv">1</span>]) <span class="cf">if</span> <span class="bu">len</span>(sys.argv) <span class="op">&gt;</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">10_000_000</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="fl">1.0</span> <span class="op">/</span> n</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> rank <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    chunk <span class="op">=</span> n <span class="op">//</span> size</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    ranges <span class="op">=</span> []</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> worker <span class="kw">in</span> <span class="bu">range</span>(size):</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        start_i <span class="op">=</span> worker <span class="op">*</span> chunk</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        end_i <span class="op">=</span> n <span class="cf">if</span> worker <span class="op">==</span> size <span class="op">-</span> <span class="dv">1</span> <span class="cf">else</span> start_i <span class="op">+</span> chunk</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        ranges.append((start_i, end_i))</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    ranges <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter: rank 0 sends one integration interval range to each MPI process.</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>start_i, end_i <span class="op">=</span> comm.scatter(ranges, root<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>local_sum <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(start_i, end_i):</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> (i <span class="op">+</span> <span class="fl">0.5</span>) <span class="op">*</span> h</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    local_sum <span class="op">+=</span> f(x)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduce: every process sends local_sum to rank 0, rank 0 sums all partial areas.</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>total_sum <span class="op">=</span> comm.<span class="bu">reduce</span>(local_sum, op<span class="op">=</span>MPI.SUM, root<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> rank <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    pi <span class="op">=</span> total_sum <span class="op">*</span> h</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    elapsed <span class="op">=</span> time.perf_counter() <span class="op">-</span> start</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;mpi_blocking p=</span><span class="sc">{</span>size<span class="sc">}</span><span class="ss"> n=</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> pi=</span><span class="sc">{</span>pi<span class="sc">:.10f}</span><span class="ss"> time=</span><span class="sc">{</span>elapsed<span class="sc">:.6f}</span><span class="ss">s error=</span><span class="sc">{</span><span class="bu">abs</span>(math.pi <span class="op">-</span> pi)<span class="sc">:.6e}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<p>非阻塞版核心代码如下：</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> array <span class="im">import</span> array</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpi4py <span class="im">import</span> MPI</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">4.0</span> <span class="op">/</span> (<span class="fl">1.0</span> <span class="op">+</span> x <span class="op">*</span> x)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>comm <span class="op">=</span> MPI.COMM_WORLD</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>rank <span class="op">=</span> comm.Get_rank()</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> comm.Get_size()</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">int</span>(sys.argv[<span class="dv">1</span>]) <span class="cf">if</span> <span class="bu">len</span>(sys.argv) <span class="op">&gt;</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">10_000_000</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="fl">1.0</span> <span class="op">/</span> n</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> rank <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    chunk <span class="op">=</span> n <span class="op">//</span> size</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    ranges <span class="op">=</span> []</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> worker <span class="kw">in</span> <span class="bu">range</span>(size):</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        start_i <span class="op">=</span> worker <span class="op">*</span> chunk</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        end_i <span class="op">=</span> n <span class="cf">if</span> worker <span class="op">==</span> size <span class="op">-</span> <span class="dv">1</span> <span class="cf">else</span> start_i <span class="op">+</span> chunk</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        ranges.append((start_i, end_i))</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    ranges <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter: rank 0 sends one integration interval range to each MPI process.</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>start_i, end_i <span class="op">=</span> comm.scatter(ranges, root<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>local_sum <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(start_i, end_i):</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> (i <span class="op">+</span> <span class="fl">0.5</span>) <span class="op">*</span> h</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    local_sum <span class="op">+=</span> f(x)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> rank <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    total_sum <span class="op">=</span> local_sum</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    requests <span class="op">=</span> []</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    buffers <span class="op">=</span> []</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> source <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, size):</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        buf <span class="op">=</span> array(<span class="st">&quot;d&quot;</span>, [<span class="fl">0.0</span>])</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Irecv: rank 0 posts receives first, so worker Isend calls can complete asynchronously.</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        requests.append(comm.Irecv(buf, source<span class="op">=</span>source, tag<span class="op">=</span><span class="dv">100</span> <span class="op">+</span> source))</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        buffers.append(buf)</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    MPI.Request.Waitall(requests)</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> buf <span class="kw">in</span> buffers:</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>        total_sum <span class="op">+=</span> buf[<span class="dv">0</span>]</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    pi <span class="op">=</span> total_sum <span class="op">*</span> h</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    elapsed <span class="op">=</span> time.perf_counter() <span class="op">-</span> start</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;mpi_nonblocking p=</span><span class="sc">{</span>size<span class="sc">}</span><span class="ss"> n=</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> pi=</span><span class="sc">{</span>pi<span class="sc">:.10f}</span><span class="ss"> time=</span><span class="sc">{</span>elapsed<span class="sc">:.6f}</span><span class="ss">s error=</span><span class="sc">{</span><span class="bu">abs</span>(math.pi <span class="op">-</span> pi)<span class="sc">:.6e}</span><span class="ss">&quot;</span>)</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    send_buf <span class="op">=</span> array(<span class="st">&quot;d&quot;</span>, [local_sum])</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Isend: worker sends its local partial sum to rank 0 without blocking on immediate receive completion.</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    req <span class="op">=</span> comm.Isend(send_buf, dest<span class="op">=</span><span class="dv">0</span>, tag<span class="op">=</span><span class="dv">100</span> <span class="op">+</span> rank)</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    req.Wait()</span></code></pre></div>
+<h3 id="性能测试与-amdahl-分析">3.3 性能测试与 Amdahl 分析</h3>
+<p>固定积分点数为 <code>10,000,000</code>，在 CCE 上分别使用 1、2、4 个
+MPI 进程运行，每种进程数运行 3 次取平均。测试结果如下。</p>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 15%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: right;">进程数 p</th>
+<th>三次运行时间/s</th>
+<th style="text-align: right;">平均 T(p)/s</th>
+<th style="text-align: right;">实测加速比 S</th>
+<th style="text-align: right;">Amdahl 理论值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>6.079585, 5.597226, 6.064438</td>
+<td style="text-align: right;">5.913750</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>5.785596, 6.145806, 6.287902</td>
+<td style="text-align: right;">6.073101</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">1.26</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>4.100012, 4.199975, 3.999982</td>
+<td style="text-align: right;">4.099990</td>
+<td style="text-align: right;">1.44</td>
+<td style="text-align: right;">1.44</td>
+</tr>
+</tbody>
+</table>
+<p>估算可并行比例 f = 0.409。 4进程阻塞平均 4.099990s，非阻塞平均
+3.709143s。</p>
+<figure>
+<img src="report/final-assets/11-mpi-performance-summary.png"
+alt="图11 MPI 性能测试汇总" />
+<figcaption aria-hidden="true">图11 MPI 性能测试汇总</figcaption>
+</figure>
+<figure>
+<img src="report/final-assets/08-mpi-amdahl-speedup.png"
+alt="图12 实测加速比与 Amdahl 理论加速比" />
+<figcaption aria-hidden="true">图12 实测加速比与 Amdahl
+理论加速比</figcaption>
+</figure>
+<p>从结果看，2 进程平均时间反而略高于 1 进程，4
+进程才体现出加速。原因是本实验中积分计算量虽然可并行，但每个 MPIJob
+都运行在容器和 Kubernetes 调度环境中，进程启动、SSH
+建连、跨节点通信、Reduce 同步都带来额外开销。2
+进程时计算节省不足以抵消这些开销；4 进程时局部循环计算减少更多，才获得约
+1.44 倍加速。按 4 进程实测加速比反推，可并行比例约为
+0.409。这个数值不代表算法理论上只有 40.9%
+可并行，而是把云端调度和通信开销也折算进了实际系统表现。</p>
+<h3 id="非阻塞通信优化">3.4 非阻塞通信优化</h3>
+<p>非阻塞版本在 4 进程下平均时间为 3.709143s，阻塞版本为
+4.099990s，本次实验中非阻塞版本略快。原因是 rank 0 提前投递多个
+<code>Irecv</code>，worker 的 <code>Isend</code>
+可以更早完成发送请求，减少最后汇总阶段的等待。由于本题每个进程只发送一个
+double
+类型局部和，通信量很小，所以改善幅度有限。如果换成矩阵分块、排序相邻交换或边界数据较大的科学计算，非阻塞通信更容易体现计算与通信重叠的价值。</p>
+<figure>
+<img src="report/final-assets/09-mpi-nonblocking-compare.png"
+alt="图13 阻塞通信与非阻塞通信对比" />
+<figcaption aria-hidden="true">图13
+阻塞通信与非阻塞通信对比</figcaption>
+</figure>
+<h2 id="四附加题">四、附加题</h2>
+<h3 id="监控系统">4.1 监控系统</h3>
+<p>附加题 1 部署了轻量 Prometheus + Grafana。Prometheus 通过 Kubernetes
+service discovery 发现节点和 Pod，并从 kubelet/cAdvisor 拉取容器
+CPU、内存等指标。Grafana 通过 provisioning 自动配置 Prometheus
+datasource 和 dashboard。Dashboard 中包含节点 CPU 使用折线图和各 Pod
+内存使用柱状图，能看到 default、monitoring、kube-system、mpi-operator
+等命名空间下的 Pod 指标。</p>
+<figure>
+<img src="report/final-assets/15-monitoring-deploy.png"
+alt="图14 Prometheus 与 Grafana 部署状态" />
+<figcaption aria-hidden="true">图14 Prometheus 与 Grafana
+部署状态</figcaption>
+</figure>
+<figure>
+<img src="report/final-assets/12-grafana-dashboard.png"
+alt="图15 Grafana Dashboard" />
+<figcaption aria-hidden="true">图15 Grafana Dashboard</figcaption>
+</figure>
+<p>Prometheus 的 Pull 模式是由服务端周期性向目标 endpoint 发起 HTTP
+请求并抓取
+metrics，这种方式便于集中配置抓取周期、标签和告警规则。Dashboard
+中使用的三个主要指标含义为：<code>container_cpu_usage_seconds_total</code>
+表示容器累计 CPU 使用时间，通常配合 <code>rate()</code> 观察单位时间内
+CPU 消耗；<code>container_memory_working_set_bytes</code>
+表示容器当前活跃内存工作集，更接近实际内存占用；<code>up</code>
+表示目标是否可被 Prometheus 成功抓取，值为 1 表示当前目标在线。</p>
+<h3 id="cicd-流水线">4.2 CI/CD 流水线</h3>
+<p>附加题 2 编写了
+<code>.github/workflows/deploy-cce.yml</code>。流水线在 push
+或手动触发后执行：Checkout 源码、生成镜像 Tag、登录华为云
+SWR、构建并推送 backend/frontend 镜像、写入 kubeconfig、执行
+<code>kubectl set image</code> 更新 CCE Deployment，最后等待 rollout
+完成并输出 Deployment 状态。敏感信息全部通过 GitHub Secrets 提供，包括
+<code>SWR_USERNAME</code>、<code>SWR_PASSWORD</code> 和
+<code>CCE_KUBECONFIG_B64</code>。</p>
+<figure>
+<img src="report/final-assets/14-cicd-workflow.png"
+alt="图16 CI/CD 工作流文件校验" />
+<figcaption aria-hidden="true">图16 CI/CD 工作流文件校验</figcaption>
+</figure>
+<p>持续集成强调每次代码提交后自动构建、测试和发现问题；持续部署是在集成通过后自动把新版本发布到目标环境。本项目的工作流把构建镜像和更新
+CCE Deployment 串起来，属于端到端部署流水线。GitOps
+的核心理念是把期望状态写入 Git 仓库，集群实际状态由自动化系统持续向 Git
+中的声明式配置收敛。当前仓库已经具备流水线文件和命令校验，若绑定 GitHub
+远程仓库并配置 Secrets，即可运行完整 Actions。</p>
+<h3 id="前沿专题边缘计算模拟-k3s-mqtt">4.3 前沿专题：边缘计算模拟 K3s +
+MQTT</h3>
+<p>附加题 3 选择 C-2。实验用本地 Docker 运行 Mosquitto 模拟边缘节点上的
+MQTT Broker，用 <code>sensor_publisher.py</code> 模拟边缘传感器，每 0.5
+秒发布一次温度、湿度和时间戳。<code>cloud_mqtt_bridge.py</code>
+作为云端桥接服务订阅 <code>edge/sensor/#</code> 主题，并通过
+<code>kubectl port-forward svc/redis-svc 63790:6379</code> 将数据写入
+CCE 集群中的 Redis。Redis
+中保存两个结构：<code>edge:sensor:latest</code> 列表保存最近 20
+条消息，<code>edge:sensor:last</code> 哈希保存最后一条消息。</p>
+<figure>
+<img src="report/final-assets/16-edge-mqtt-redis.png"
+alt="图17 边缘 MQTT 数据写入 CCE Redis" />
+<figcaption aria-hidden="true">图17 边缘 MQTT 数据写入 CCE
+Redis</figcaption>
+</figure>
+<p>MQTT
+适合边缘场景，主要原因是协议轻量、报文头小、发布订阅模型能降低设备与云端之间的耦合。传感器只需要把数据发布到主题，不需要知道云端
+Redis、数据库或业务服务的位置。弱网环境下可通过 QoS 1
+保证消息至少送达一次，但也要注意重复消息、离线缓存大小和网络恢复后的突发流量。本实验使用本地
+Broker 模拟边缘节点，如果部署到真实 K3s，可以把 Mosquitto
+作为边缘集群中的 Deployment，把桥接程序部署到云端
+K8s。云边协同的主要挑战在于链路延迟、网络抖动、边缘节点资源有限以及安全认证。实际系统中应为
+MQTT 开启用户名密码或证书认证，并在桥接端做去重和限流。</p>
+<h2 id="五主要代码摘要">五、主要代码摘要</h2>
+<p>后端 Flask 代码摘要：</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime, timezone</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> redis</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> flask <span class="im">import</span> Flask, jsonify</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> Flask(<span class="va">__name__</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> redis_client():</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    host <span class="op">=</span> os.getenv(<span class="st">&quot;REDIS_HOST&quot;</span>, <span class="st">&quot;localhost&quot;</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    port <span class="op">=</span> <span class="bu">int</span>(os.getenv(<span class="st">&quot;REDIS_PORT&quot;</span>, <span class="st">&quot;6379&quot;</span>))</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    password <span class="op">=</span> os.getenv(<span class="st">&quot;REDIS_PASSWORD&quot;</span>) <span class="kw">or</span> <span class="va">None</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> redis.Redis(host<span class="op">=</span>host, port<span class="op">=</span>port, password<span class="op">=</span>password, decode_responses<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="at">@app.get</span>(<span class="st">&quot;/api/ping&quot;</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ping():</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    payload <span class="op">=</span> {</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;status&quot;</span>: <span class="st">&quot;ok&quot;</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;student&quot;</span>: <span class="st">&quot;2023112573 张春冉&quot;</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;time&quot;</span>: datetime.now(timezone.utc).isoformat(),</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        redis_client().incr(<span class="st">&quot;ping_count&quot;</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        payload[<span class="st">&quot;redis&quot;</span>] <span class="op">=</span> <span class="st">&quot;connected&quot;</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> exc:</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        payload[<span class="st">&quot;redis&quot;</span>] <span class="op">=</span> <span class="st">&quot;unavailable&quot;</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        payload[<span class="st">&quot;redis_error&quot;</span>] <span class="op">=</span> exc.<span class="va">__class__</span>.<span class="va">__name__</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jsonify(payload)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="at">@app.get</span>(<span class="st">&quot;/api/count&quot;</span>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count():</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    value <span class="op">=</span> redis_client().get(<span class="st">&quot;ping_count&quot;</span>) <span class="kw">or</span> <span class="st">&quot;0&quot;</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jsonify({<span class="st">&quot;ping_count&quot;</span>: <span class="bu">int</span>(value)})</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="at">@app.get</span>(<span class="st">&quot;/api/httpbin&quot;</span>)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> httpbin():</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.get(<span class="st">&quot;https://httpbin.org/status/204&quot;</span>, timeout<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jsonify({<span class="st">&quot;status_code&quot;</span>: response.status_code})</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    app.run(host<span class="op">=</span><span class="st">&quot;0.0.0.0&quot;</span>, port<span class="op">=</span><span class="dv">5000</span>)</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<p>后端 Dockerfile：</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> python:3.11-slim <span class="kw">AS</span> builder</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /build</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> requirements.txt .</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">pip</span> install <span class="at">--no-cache-dir</span> <span class="at">-r</span> requirements.txt <span class="at">--target</span> /build/packages</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> python:3.11-slim</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> <span class="op">--from=builder</span> /build/packages /app/packages</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> . .</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">ENV</span> PYTHONPATH=/app/packages</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">EXPOSE</span> 5000</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">&quot;python&quot;</span>, <span class="st">&quot;app.py&quot;</span>]</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<p>前端 Dockerfile：</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> nginx:1.25-alpine</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> nginx.conf /etc/nginx/conf.d/default.conf</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> static/ /usr/share/nginx/html/</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">EXPOSE</span> 80</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">&quot;nginx&quot;</span>, <span class="st">&quot;-g&quot;</span>, <span class="st">&quot;daemon off;&quot;</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<p>MPIJob 摘要：</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> kubeflow.org/v2beta1</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> MPIJob</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> mpi-integral</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> default</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">launcherCreationPolicy</span><span class="kw">:</span><span class="at"> WaitForWorkersReady</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">slotsPerWorker</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">runPolicy</span><span class="kw">:</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cleanPodPolicy</span><span class="kw">:</span><span class="at"> Running</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">mpiReplicaSpecs</span><span class="kw">:</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Launcher</span><span class="kw">:</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">template</span><span class="kw">:</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">imagePullSecrets</span><span class="kw">:</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> default-secret</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> launcher</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">image</span><span class="kw">:</span><span class="at"> swr.cn-north-4.myhuaweicloud.com/cloud-compute-2026/mpi4py:latest</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">env</span><span class="kw">:</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> OMPI_ALLOW_RUN_AS_ROOT</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="at">                  </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;1&quot;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> OMPI_ALLOW_RUN_AS_ROOT_CONFIRM</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="at">                  </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;1&quot;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">command</span><span class="kw">:</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> mpirun</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> --hostfile</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> /etc/mpi/hostfile</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> --map-by</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> slot</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> --mca</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> plm_rsh_args</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectionAttempts=10&quot;</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> -n</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;4&quot;</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> python</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> /opt/mpi/integral_mpi.py</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;10000000&quot;</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Worker</span><span class="kw">:</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">template</span><span class="kw">:</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">imagePullSecrets</span><span class="kw">:</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> default-secret</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> worker</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">image</span><span class="kw">:</span><span class="at"> swr.cn-north-4.myhuaweicloud.com/cloud-compute-2026/mpi4py:latest</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">env</span><span class="kw">:</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> OMPI_ALLOW_RUN_AS_ROOT</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="at">                  </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;1&quot;</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> OMPI_ALLOW_RUN_AS_ROOT_CONFIRM</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="at">                  </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;1&quot;</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">requests</span><span class="kw">:</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="at">                  </span><span class="fu">cpu</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;100m&quot;</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="at">                  </span><span class="fu">memory</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;256Mi&quot;</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">limits</span><span class="kw">:</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="at">                  </span><span class="fu">cpu</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;500m&quot;</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="at">                  </span><span class="fu">memory</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;512Mi&quot;</span></span></code></pre></div>
+<p>CI/CD 工作流摘要：</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Build and deploy to Huawei CCE</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> main</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> master</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">env</span><span class="kw">:</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">SWR_REGISTRY</span><span class="kw">:</span><span class="at"> swr.cn-north-4.myhuaweicloud.com</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">SWR_NAMESPACE</span><span class="kw">:</span><span class="at"> cloud-compute-2026</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">BACKEND_IMAGE</span><span class="kw">:</span><span class="at"> backend</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">FRONTEND_IMAGE</span><span class="kw">:</span><span class="at"> frontend</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build-and-deploy</span><span class="kw">:</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Checkout source</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set image tag</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> echo &quot;IMAGE_TAG=${GITHUB_SHA::7}&quot; &gt;&gt; &quot;$GITHUB_ENV&quot;</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Login to Huawei SWR</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> docker/login-action@v3</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">registry</span><span class="kw">:</span><span class="at"> ${{ env.SWR_REGISTRY }}</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">username</span><span class="kw">:</span><span class="at"> ${{ secrets.SWR_USERNAME }}</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">password</span><span class="kw">:</span><span class="at"> ${{ secrets.SWR_PASSWORD }}</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Build and push backend image</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>          docker build -t &quot;$SWR_REGISTRY/$SWR_NAMESPACE/$BACKEND_IMAGE:$IMAGE_TAG&quot; ./backend</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>          docker push &quot;$SWR_REGISTRY/$SWR_NAMESPACE/$BACKEND_IMAGE:$IMAGE_TAG&quot;</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Build and push frontend image</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>          docker build -t &quot;$SWR_REGISTRY/$SWR_NAMESPACE/$FRONTEND_IMAGE:$IMAGE_TAG&quot; ./frontend</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>          docker push &quot;$SWR_REGISTRY/$SWR_NAMESPACE/$FRONTEND_IMAGE:$IMAGE_TAG&quot;</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Configure kubectl</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>          mkdir -p &quot;$HOME/.kube&quot;</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>          echo &quot;${{ secrets.CCE_KUBECONFIG_B64 }}&quot; | base64 -d &gt; &quot;$HOME/.kube/config&quot;</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>          kubectl version --client</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>          kubectl get nodes</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Update CCE deployments</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>          kubectl set image deployment/backend backend=&quot;$SWR_REGISTRY/$SWR_NAMESPACE/$BACKEND_IMAGE:$IMAGE_TAG&quot;</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>          kubectl set image deployment/frontend frontend=&quot;$SWR_REGISTRY/$SWR_NAMESPACE/$FRONTEND_IMAGE:$IMAGE_TAG&quot;</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>          kubectl rollout status deployment/backend --timeout=180s</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>          kubectl rollout status deployment/frontend --timeout=180s</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>          kubectl get deployment backend frontend -o wide</span></code></pre></div>
+<p>监控 YAML 摘要：</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Namespace</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> monitoring</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> ServiceAccount</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> prometheus</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> monitoring</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> rbac.authorization.k8s.io/v1</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> ClusterRole</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> prometheus-lite</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">rules</span><span class="kw">:</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">apiGroups</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;&quot;</span><span class="kw">]</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">resources</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;nodes&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;nodes/proxy&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;services&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;endpoints&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;pods&quot;</span><span class="kw">]</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">verbs</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;get&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;list&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;watch&quot;</span><span class="kw">]</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">nonResourceURLs</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;/metrics&quot;</span><span class="kw">]</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">verbs</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;get&quot;</span><span class="kw">]</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> rbac.authorization.k8s.io/v1</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> ClusterRoleBinding</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> prometheus-lite</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="fu">roleRef</span><span class="kw">:</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">apiGroup</span><span class="kw">:</span><span class="at"> rbac.authorization.k8s.io</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">kind</span><span class="kw">:</span><span class="at"> ClusterRole</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> prometheus-lite</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="fu">subjects</span><span class="kw">:</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">kind</span><span class="kw">:</span><span class="at"> ServiceAccount</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> prometheus</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> monitoring</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> ConfigMap</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> prometheus-config</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> monitoring</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span><span class="kw">:</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="fu">  prometheus.yml</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    global:</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>      scrape_interval: 15s</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    scrape_configs:</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>      - job_name: kubernetes-nodes-cadvisor</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>        scheme: https</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>        tls_config:</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>          insecure_skip_verify: true</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>        kubernetes_sd_configs:</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>          - role: node</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>        relabel_configs:</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>          - target_label: __address__</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>            replacement: kubernetes.default.svc:443</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>          - source_labels: [__meta_kubernetes_node_name]</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>            regex: (.+)</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>            target_label: __metrics_path__</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>            replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>      - job_name: kubernetes-pods</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>        kubernetes_sd_configs:</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>          - role: pod</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>        relabel_configs:</span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]</span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>            action: keep</span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>            regex: true</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]</span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>            action: replace</span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>            target_label: __metrics_path__</span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>            regex: (.+)</span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>          - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>            action: replace</span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>            regex: ([^:]+)(?::\d+)?;(\d+)</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>            replacement: $1:$2</span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>            target_label: __address__</span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Deployment</span></span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> prometheus</span></span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> monitoring</span></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span></span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">matchLabels</span><span class="kw">:</span></span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">app</span><span class="kw">:</span><span class="at"> prometheus</span></span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span></span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">app</span><span class="kw">:</span><span class="at"> prometheus</span></span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">serviceAccountName</span><span class="kw">:</span><span class="at"> prometheus</span></span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> prometheus</span></span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> prom/prometheus:v2.55.1</span></span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">args</span><span class="kw">:</span></span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> --config.file=/etc/prometheus/prometheus.yml</span></span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> --storage.tsdb.path=/prometheus</span></span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> --web.enable-lifecycle</span></span>
+<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> </span><span class="fu">containerPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">9090</span></span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">requests</span><span class="kw">:</span></span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">cpu</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;100m&quot;</span></span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">memory</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;256Mi&quot;</span></span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">limits</span><span class="kw">:</span></span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">cpu</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;500m&quot;</span></span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">memory</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;768Mi&quot;</span></span>
+<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">volumeMounts</span><span class="kw">:</span></span>
+<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> config</span></span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">mountPath</span><span class="kw">:</span><span class="at"> /etc/prometheus</span></span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> config</span></span>
+<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">configMap</span><span class="kw">:</span></span>
+<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">name</span><span class="kw">:</span><span class="at"> prometheus-config</span></span>
+<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Service</span></span>
+<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> prometheus</span></span>
+<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> monitoring</span></span>
+<span id="cb8-124"><a href="#cb8-124" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> ClusterIP</span></span>
+<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span></span>
+<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">app</span><span class="kw">:</span><span class="at"> prometheus</span></span>
+<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a><span class="at">   </span></span></code></pre></div>
+<p>边缘传感器发布脚本：</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime, timezone</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> paho.mqtt.client <span class="im">as</span> mqtt</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>BROKER_HOST <span class="op">=</span> <span class="st">&quot;127.0.0.1&quot;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>BROKER_PORT <span class="op">=</span> <span class="dv">1883</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>TOPIC <span class="op">=</span> <span class="st">&quot;edge/sensor/room-a&quot;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_payload(seq):</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;device_id&quot;</span>: <span class="st">&quot;edge-room-a-01&quot;</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;seq&quot;</span>: seq,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;temperature&quot;</span>: <span class="bu">round</span>(<span class="fl">24.0</span> <span class="op">+</span> random.random() <span class="op">*</span> <span class="fl">3.0</span>, <span class="dv">2</span>),</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;humidity&quot;</span>: <span class="bu">round</span>(<span class="fl">45.0</span> <span class="op">+</span> random.random() <span class="op">*</span> <span class="fl">10.0</span>, <span class="dv">2</span>),</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;timestamp&quot;</span>: datetime.now(timezone.utc).isoformat(),</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    client <span class="op">=</span> mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    client.<span class="ex">connect</span>(BROKER_HOST, BROKER_PORT, keepalive<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> seq <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>):</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        payload <span class="op">=</span> build_payload(seq)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>        client.publish(TOPIC, json.dumps(payload, ensure_ascii<span class="op">=</span><span class="va">False</span>), qos<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;published </span><span class="sc">{</span>TOPIC<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>payload<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="fl">0.5</span>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    client.disconnect()</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div>
+<p>边缘到云端 Redis 桥接脚本摘要：</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> paho.mqtt.client <span class="im">as</span> mqtt</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> redis</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>MQTT_HOST <span class="op">=</span> os.getenv(<span class="st">&quot;MQTT_HOST&quot;</span>, <span class="st">&quot;127.0.0.1&quot;</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>MQTT_PORT <span class="op">=</span> <span class="bu">int</span>(os.getenv(<span class="st">&quot;MQTT_PORT&quot;</span>, <span class="st">&quot;1883&quot;</span>))</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>MQTT_TOPIC <span class="op">=</span> os.getenv(<span class="st">&quot;MQTT_TOPIC&quot;</span>, <span class="st">&quot;edge/sensor/#&quot;</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>REDIS_HOST <span class="op">=</span> os.getenv(<span class="st">&quot;REDIS_HOST&quot;</span>, <span class="st">&quot;127.0.0.1&quot;</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>REDIS_PORT <span class="op">=</span> <span class="bu">int</span>(os.getenv(<span class="st">&quot;REDIS_PORT&quot;</span>, <span class="st">&quot;63790&quot;</span>))</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>REDIS_PASSWORD <span class="op">=</span> os.getenv(<span class="st">&quot;REDIS_PASSWORD&quot;</span>) <span class="kw">or</span> <span class="va">None</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>rdb <span class="op">=</span> redis.Redis(</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    host<span class="op">=</span>REDIS_HOST,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    port<span class="op">=</span>REDIS_PORT,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    password<span class="op">=</span>REDIS_PASSWORD,</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    decode_responses<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> on_connect(client, userdata, flags, reason_code, properties):</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;connected mqtt reason=</span><span class="sc">{</span>reason_code<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    client.subscribe(MQTT_TOPIC, qos<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> on_message(client, userdata, message):</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    payload <span class="op">=</span> message.payload.decode(<span class="st">&quot;utf-8&quot;</span>)</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> json.loads(payload)</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    rdb.lpush(<span class="st">&quot;edge:sensor:latest&quot;</span>, json.dumps(data, ensure_ascii<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    rdb.ltrim(<span class="st">&quot;edge:sensor:latest&quot;</span>, <span class="dv">0</span>, <span class="dv">19</span>)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>    rdb.hset(<span class="st">&quot;edge:sensor:last&quot;</span>, mapping<span class="op">=</span>{</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;topic&quot;</span>: message.topic,</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;device_id&quot;</span>: data.get(<span class="st">&quot;device_id&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;seq&quot;</span>: data.get(<span class="st">&quot;seq&quot;</span>, <span class="dv">0</span>),</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;temperature&quot;</span>: data.get(<span class="st">&quot;temperature&quot;</span>, <span class="dv">0</span>),</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;humidity&quot;</span>: data.get(<span class="st">&quot;humidity&quot;</span>, <span class="dv">0</span>),</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;timestamp&quot;</span>: data.get(<span class="st">&quot;timestamp&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;stored topic=</span><span class="sc">{</span>message<span class="sc">.</span>topic<span class="sc">}</span><span class="ss"> seq=</span><span class="sc">{</span>data<span class="sc">.</span>get(<span class="st">&#39;seq&#39;</span>)<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>    client <span class="op">=</span> mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>    client.on_connect <span class="op">=</span> on_connect</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>    client.on_message <span class="op">=</span> on_message</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>    client.<span class="ex">connect</span>(MQTT_HOST, MQTT_PORT, keepalive<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>    client.loop_start()</span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>            time.sleep(<span class="dv">1</span>)</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">KeyboardInterrupt</span>:</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">finally</span>:</span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>        client.loop_stop()</span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>        client.disconnect()</span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div>
+<h2 id="六总结">六、总结</h2>
+<p>本次课程设计把容器化、Kubernetes
+编排、云负载均衡、持久化存储、配置分离、弹性伸缩和并行计算串成了一套完整流程。第一部分中，镜像架构、SWR
+鉴权、ELB 注解、ConfigMap 挂载和 PVC 持久化都需要逐项验证，单看 YAML
+是否写完并不能证明系统可用。实际排查时，<code>kubectl describe pod</code>、<code>kubectl describe svc</code>、<code>kubectl logs</code>
+和 <code>kubectl top</code> 比单纯看 <code>get pods</code>
+更有价值。</p>
+<p>MPI
+部分让我更直观看到云原生环境下并行程序的额外成本。数值积分算法本身容易并行，但容器启动、SSH
+建连、跨节点通信和 Reduce
+同步都会影响实测加速比，所以实测结果不会简单等于理论线性加速。非阻塞通信在本实验中有小幅改善，但由于通信数据量只有一个局部和，优化空间有限。监控、CI/CD
+和 MQTT
+加分项进一步说明，一个云应用不仅要能部署，还要能观测、能自动交付，并能和边缘侧数据流连接起来。</p>
+<h2 id="附录文件清单">附录：文件清单</h2>
+<ul>
+<li>后端：<code>backend/app.py</code>、<code>backend/Dockerfile</code>、<code>backend/requirements.txt</code></li>
+<li>前端：<code>frontend/static/index.html</code>、<code>frontend/nginx.conf</code>、<code>frontend/Dockerfile</code></li>
+<li>Kubernetes：<code>k8s/00-config.yaml</code> 至
+<code>k8s/05-hpa.yaml</code></li>
+<li>MPI：<code>mpi/integral_serial.py</code>、<code>mpi/integral_mpi.py</code>、<code>mpi/integral_mpi_nonblocking.py</code>、<code>mpi/mpijob.yaml</code></li>
+<li>监控：<code>k8s/bonus-monitoring/monitoring.yaml</code></li>
+<li>CI/CD：<code>.github/workflows/deploy-cce.yml</code></li>
+<li>边缘 MQTT：<code>bonus/edge-mqtt/</code></li>
+<li>证据文件：<code>report/evidence/</code></li>
+<li>报告截图：<code>report/final-assets/</code></li>
+</ul>
+</body>
+</html>

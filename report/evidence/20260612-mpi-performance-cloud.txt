@@ -1,0 +1,145 @@
+# MPI performance on CCE
+2026-06-12 21:15:45
+n=10000000
+
+--- blocking p=1 run 1 ---
+mpijob.kubeflow.org "mpi-perf-bl-1-1" deleted
+
+mpijob.kubeflow.org/mpi-perf-bl-1-1 created
+NAME                             READY   STATUS      RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-perf-bl-1-1-launcher-mwsgl   0/1     Completed   0          12s   10.0.0.177   192.168.0.113   <none>           <none>
+Warning: Permanently added 'mpi-perf-bl-1-1-worker-1.mpi-perf-bl-1-1.default.svc' (ED25519) to the list of known hosts.
+Warning: Permanently added 'mpi-perf-bl-1-1-worker-0.mpi-perf-bl-1-1.default.svc' (ED25519) to the list of known hosts.
+mpi_blocking p=1 n=10000000 pi=3.1415926536 time=6.079585s error=6.217249e-14
+Created Running Succeeded
+
+--- blocking p=1 run 2 ---
+mpijob.kubeflow.org "mpi-perf-bl-1-2" deleted
+
+mpijob.kubeflow.org/mpi-perf-bl-1-2 created
+NAME                             READY   STATUS      RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-perf-bl-1-2-launcher-dwbnm   0/1     Completed   0          11s   10.0.0.179   192.168.0.113   <none>           <none>
+Warning: Permanently added 'mpi-perf-bl-1-2-worker-1.mpi-perf-bl-1-2.default.svc' (ED25519) to the list of known hosts.
+Warning: Permanently added 'mpi-perf-bl-1-2-worker-0.mpi-perf-bl-1-2.default.svc' (ED25519) to the list of known hosts.
+mpi_blocking p=1 n=10000000 pi=3.1415926536 time=5.597226s error=6.217249e-14
+Created Running Succeeded
+
+--- blocking p=1 run 3 ---
+mpijob.kubeflow.org "mpi-perf-bl-1-3" deleted
+
+mpijob.kubeflow.org/mpi-perf-bl-1-3 created
+NAME                             READY   STATUS      RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-perf-bl-1-3-launcher-5k244   0/1     Completed   0          12s   10.0.0.181   192.168.0.113   <none>           <none>
+Warning: Permanently added 'mpi-perf-bl-1-3-worker-1.mpi-perf-bl-1-3.default.svc' (ED25519) to the list of known hosts.
+Warning: Permanently added 'mpi-perf-bl-1-3-worker-0.mpi-perf-bl-1-3.default.svc' (ED25519) to the list of known hosts.
+mpi_blocking p=1 n=10000000 pi=3.1415926536 time=6.064438s error=6.217249e-14
+Created Running Succeeded
+
+--- blocking p=2 run 1 ---
+mpijob.kubeflow.org "mpi-perf-bl-2-1" deleted
+
+mpijob.kubeflow.org/mpi-perf-bl-2-1 created
+NAME                             READY   STATUS      RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-perf-bl-2-1-launcher-m2mz6   0/1     Completed   0          12s   10.0.0.183   192.168.0.113   <none>           <none>
+Warning: Permanently added 'mpi-perf-bl-2-1-worker-1.mpi-perf-bl-2-1.default.svc' (ED25519) to the list of known hosts.
+Warning: Permanently added 'mpi-perf-bl-2-1-worker-0.mpi-perf-bl-2-1.default.svc' (ED25519) to the list of known hosts.
+mpi_blocking p=2 n=10000000 pi=3.1415926536 time=5.785596s error=1.296740e-13
+Created Running Succeeded
+
+--- blocking p=2 run 2 ---
+mpijob.kubeflow.org "mpi-perf-bl-2-2" deleted
+
+mpijob.kubeflow.org/mpi-perf-bl-2-2 created
+NAME                             READY   STATUS      RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-perf-bl-2-2-launcher-wmxzc   0/1     Completed   0          12s   10.0.0.185   192.168.0.113   <none>           <none>
+Warning: Permanently added 'mpi-perf-bl-2-2-worker-0.mpi-perf-bl-2-2.default.svc' (ED25519) to the list of known hosts.
+Warning: Permanently added 'mpi-perf-bl-2-2-worker-1.mpi-perf-bl-2-2.default.svc' (ED25519) to the list of known hosts.
+mpi_blocking p=2 n=10000000 pi=3.1415926536 time=6.145806s error=1.296740e-13
+Created Running Succeeded
+
+--- blocking p=2 run 3 ---
+mpijob.kubeflow.org "mpi-perf-bl-2-3" deleted
+
+mpijob.kubeflow.org/mpi-perf-bl-2-3 created
+NAME                             READY   STATUS      RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-perf-bl-2-3-launcher-js84c   0/1     Completed   0          12s   10.0.0.187   192.168.0.113   <none>           <none>
+Warning: Permanently added 'mpi-perf-bl-2-3-worker-0.mpi-perf-bl-2-3.default.svc' (ED25519) to the list of known hosts.
+Warning: Permanently added 'mpi-perf-bl-2-3-worker-1.mpi-perf-bl-2-3.default.svc' (ED25519) to the list of known hosts.
+mpi_blocking p=2 n=10000000 pi=3.1415926536 time=6.287902s error=1.296740e-13
+Created Running Succeeded
+
+--- blocking p=4 run 1 ---
+mpijob.kubeflow.org "mpi-perf-bl-4-1" deleted
+
+mpijob.kubeflow.org/mpi-perf-bl-4-1 created
+NAME                             READY   STATUS      RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-perf-bl-4-1-launcher-dqz9b   0/1     Completed   0          8s    10.0.0.189   192.168.0.113   <none>           <none>
+mpi-perf-bl-4-1-worker-0         1/1     Running     0          9s    10.0.0.39    192.168.0.214   <none>           <none>
+mpi-perf-bl-4-1-worker-1         1/1     Running     0          9s    10.0.0.188   192.168.0.113   <none>           <none>
+Warning: Permanently added 'mpi-perf-bl-4-1-worker-0.mpi-perf-bl-4-1.default.svc' (ED25519) to the list of known hosts.
+Warning: Permanently added 'mpi-perf-bl-4-1-worker-1.mpi-perf-bl-4-1.default.svc' (ED25519) to the list of known hosts.
+mpi_blocking p=4 n=10000000 pi=3.1415926536 time=4.100012s error=1.234568e-13
+Created Running Succeeded
+
+--- blocking p=4 run 2 ---
+mpijob.kubeflow.org "mpi-perf-bl-4-2" deleted
+
+mpijob.kubeflow.org/mpi-perf-bl-4-2 created
+NAME                             READY   STATUS      RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-perf-bl-4-2-launcher-r9ppf   0/1     Completed   0          12s   10.0.0.191   192.168.0.113   <none>           <none>
+Warning: Permanently added 'mpi-perf-bl-4-2-worker-0.mpi-perf-bl-4-2.default.svc' (ED25519) to the list of known hosts.
+Warning: Permanently added 'mpi-perf-bl-4-2-worker-1.mpi-perf-bl-4-2.default.svc' (ED25519) to the list of known hosts.
+mpi_blocking p=4 n=10000000 pi=3.1415926536 time=4.199975s error=1.234568e-13
+Created Running Succeeded
+
+--- blocking p=4 run 3 ---
+mpijob.kubeflow.org "mpi-perf-bl-4-3" deleted
+
+mpijob.kubeflow.org/mpi-perf-bl-4-3 created
+NAME                             READY   STATUS      RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-perf-bl-4-3-launcher-hbbfz   0/1     Completed   0          8s    10.0.0.193   192.168.0.113   <none>           <none>
+mpi-perf-bl-4-3-worker-0         1/1     Running     0          10s   10.0.0.41    192.168.0.214   <none>           <none>
+mpi-perf-bl-4-3-worker-1         1/1     Running     0          10s   10.0.0.192   192.168.0.113   <none>           <none>
+Warning: Permanently added 'mpi-perf-bl-4-3-worker-0.mpi-perf-bl-4-3.default.svc' (ED25519) to the list of known hosts.
+Warning: Permanently added 'mpi-perf-bl-4-3-worker-1.mpi-perf-bl-4-3.default.svc' (ED25519) to the list of known hosts.
+mpi_blocking p=4 n=10000000 pi=3.1415926536 time=3.999982s error=1.234568e-13
+Created Running
+
+--- nonblocking p=4 run 1 ---
+mpijob.kubeflow.org "mpi-perf-no-4-1" deleted
+
+mpijob.kubeflow.org/mpi-perf-no-4-1 created
+NAME                             READY   STATUS      RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-perf-no-4-1-launcher-r4pgk   0/1     Completed   0          7s    10.0.0.195   192.168.0.113   <none>           <none>
+mpi-perf-no-4-1-worker-0         1/1     Running     0          9s    10.0.0.42    192.168.0.214   <none>           <none>
+mpi-perf-no-4-1-worker-1         1/1     Running     0          9s    10.0.0.194   192.168.0.113   <none>           <none>
+Warning: Permanently added 'mpi-perf-no-4-1-worker-1.mpi-perf-no-4-1.default.svc' (ED25519) to the list of known hosts.
+Warning: Permanently added 'mpi-perf-no-4-1-worker-0.mpi-perf-no-4-1.default.svc' (ED25519) to the list of known hosts.
+mpi_nonblocking p=4 n=10000000 pi=3.1415926536 time=3.727457s error=1.234568e-13
+Created Running
+
+--- nonblocking p=4 run 2 ---
+mpijob.kubeflow.org "mpi-perf-no-4-2" deleted
+
+mpijob.kubeflow.org/mpi-perf-no-4-2 created
+NAME                             READY   STATUS      RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-perf-no-4-2-launcher-9ft92   0/1     Completed   0          7s    10.0.0.197   192.168.0.113   <none>           <none>
+mpi-perf-no-4-2-worker-0         1/1     Running     0          9s    10.0.0.43    192.168.0.214   <none>           <none>
+mpi-perf-no-4-2-worker-1         1/1     Running     0          8s    10.0.0.196   192.168.0.113   <none>           <none>
+Warning: Permanently added 'mpi-perf-no-4-2-worker-0.mpi-perf-no-4-2.default.svc' (ED25519) to the list of known hosts.
+Warning: Permanently added 'mpi-perf-no-4-2-worker-1.mpi-perf-no-4-2.default.svc' (ED25519) to the list of known hosts.
+mpi_nonblocking p=4 n=10000000 pi=3.1415926536 time=3.799980s error=1.234568e-13
+Created Running Succeeded
+
+--- nonblocking p=4 run 3 ---
+mpijob.kubeflow.org "mpi-perf-no-4-3" deleted
+
+mpijob.kubeflow.org/mpi-perf-no-4-3 created
+NAME                             READY   STATUS      RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-perf-no-4-3-launcher-59lp8   0/1     Completed   0          7s    10.0.0.199   192.168.0.113   <none>           <none>
+mpi-perf-no-4-3-worker-0         1/1     Running     0          9s    10.0.0.44    192.168.0.214   <none>           <none>
+mpi-perf-no-4-3-worker-1         1/1     Running     0          9s    10.0.0.198   192.168.0.113   <none>           <none>
+Warning: Permanently added 'mpi-perf-no-4-3-worker-1.mpi-perf-no-4-3.default.svc' (ED25519) to the list of known hosts.
+Warning: Permanently added 'mpi-perf-no-4-3-worker-0.mpi-perf-no-4-3.default.svc' (ED25519) to the list of known hosts.
+mpi_nonblocking p=4 n=10000000 pi=3.1415926536 time=3.599992s error=1.234568e-13
+Created Running

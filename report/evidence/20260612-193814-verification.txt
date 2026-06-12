@@ -1,0 +1,9 @@
+## local unit test
+
+## backend public API
+{"redis":"connected","status":"ok","student":"2023112573 \u5f20\u6625\u5189","time":"2026-06-12T11:38:14.536923+00:00"}
+
+
+## frontend public API proxy
+{"redis":"connected","status":"ok","student":"2023112573 \u5f20\u6625\u5189","time":"2026-06-12T11:38:14.691979+00:00"}
+

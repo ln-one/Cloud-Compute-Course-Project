@@ -1,0 +1,48 @@
+# edge MQTT to CCE Redis verification
+Fri Jun 12 21:28:25 CST 2026
+--- broker ---
+edge-mosquitto Up 28 seconds 0.0.0.0:1883->1883/tcp, [::]:1883->1883/tcp
+--- publish sensor messages ---
+published edge/sensor/room-a {'device_id': 'edge-room-a-01', 'seq': 1, 'temperature': 25.76, 'humidity': 46.51, 'timestamp': '2026-06-12T13:28:25.551556+00:00'}
+published edge/sensor/room-a {'device_id': 'edge-room-a-01', 'seq': 2, 'temperature': 24.45, 'humidity': 51.8, 'timestamp': '2026-06-12T13:28:26.056894+00:00'}
+published edge/sensor/room-a {'device_id': 'edge-room-a-01', 'seq': 3, 'temperature': 26.05, 'humidity': 50.27, 'timestamp': '2026-06-12T13:28:26.559349+00:00'}
+published edge/sensor/room-a {'device_id': 'edge-room-a-01', 'seq': 4, 'temperature': 26.73, 'humidity': 45.74, 'timestamp': '2026-06-12T13:28:27.063600+00:00'}
+published edge/sensor/room-a {'device_id': 'edge-room-a-01', 'seq': 5, 'temperature': 25.76, 'humidity': 51.25, 'timestamp': '2026-06-12T13:28:27.568318+00:00'}
+published edge/sensor/room-a {'device_id': 'edge-room-a-01', 'seq': 6, 'temperature': 24.95, 'humidity': 47.5, 'timestamp': '2026-06-12T13:28:28.073459+00:00'}
+published edge/sensor/room-a {'device_id': 'edge-room-a-01', 'seq': 7, 'temperature': 25.8, 'humidity': 53.94, 'timestamp': '2026-06-12T13:28:28.576217+00:00'}
+published edge/sensor/room-a {'device_id': 'edge-room-a-01', 'seq': 8, 'temperature': 24.4, 'humidity': 46.98, 'timestamp': '2026-06-12T13:28:29.080830+00:00'}
+published edge/sensor/room-a {'device_id': 'edge-room-a-01', 'seq': 9, 'temperature': 24.24, 'humidity': 47.39, 'timestamp': '2026-06-12T13:28:29.582609+00:00'}
+published edge/sensor/room-a {'device_id': 'edge-room-a-01', 'seq': 10, 'temperature': 25.21, 'humidity': 46.76, 'timestamp': '2026-06-12T13:28:30.087884+00:00'}
+--- redis latest list from CCE redis pod ---
+Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
+{"device_id": "edge-room-a-01", "seq": 10, "temperature": 25.21, "humidity": 46.76, "timestamp": "2026-06-12T13:28:30.087884+00:00"}
+{"device_id": "edge-room-a-01", "seq": 9, "temperature": 24.24, "humidity": 47.39, "timestamp": "2026-06-12T13:28:29.582609+00:00"}
+{"device_id": "edge-room-a-01", "seq": 8, "temperature": 24.4, "humidity": 46.98, "timestamp": "2026-06-12T13:28:29.080830+00:00"}
+{"device_id": "edge-room-a-01", "seq": 7, "temperature": 25.8, "humidity": 53.94, "timestamp": "2026-06-12T13:28:28.576217+00:00"}
+{"device_id": "edge-room-a-01", "seq": 6, "temperature": 24.95, "humidity": 47.5, "timestamp": "2026-06-12T13:28:28.073459+00:00"}
+--- redis last hash from CCE redis pod ---
+topic
+edge/sensor/room-a
+device_id
+edge-room-a-01
+seq
+10
+temperature
+25.21
+humidity
+46.76
+timestamp
+2026-06-12T13:28:30.087884+00:00
+Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
+--- bridge log ---
+connected mqtt reason=Success
+stored topic=edge/sensor/room-a seq=1
+stored topic=edge/sensor/room-a seq=2
+stored topic=edge/sensor/room-a seq=3
+stored topic=edge/sensor/room-a seq=4
+stored topic=edge/sensor/room-a seq=5
+stored topic=edge/sensor/room-a seq=6
+stored topic=edge/sensor/room-a seq=7
+stored topic=edge/sensor/room-a seq=8
+stored topic=edge/sensor/room-a seq=9
+stored topic=edge/sensor/room-a seq=10

@@ -1,0 +1,44 @@
+## metrics-server and HPA ready
+Fri Jun 12 20:26:33 CST 2026
+
+## metrics-server pod
+NAME                              READY   STATUS    RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+metrics-server-6d4d479f59-zscxs   1/1     Running   0          81s   10.0.0.137   192.168.0.113   <none>           <none>
+
+## kubectl top nodes
+NAME            CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+192.168.0.113   99m          5%       1329Mi          52%         
+192.168.0.214   54m          2%       1450Mi          57%         
+
+## kubectl top pods
+NAME                       CPU(cores)   MEMORY(bytes)   
+backend-97b4d5c4-drp84     1m           34Mi            
+frontend-658dcb676-2dgdj   1m           2Mi             
+redis-ff6998b77-vjdxt      4m           3Mi             
+
+## hpa before pressure
+NAME          REFERENCE            TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: 1%/60%   1         4         1          3h29m
+Name:                                                  backend-hpa
+Namespace:                                             default
+Labels:                                                <none>
+Annotations:                                           <none>
+CreationTimestamp:                                     Fri, 12 Jun 2026 16:57:17 +0800
+Reference:                                             Deployment/backend
+Metrics:                                               ( current / target )
+  resource cpu on pods  (as a percentage of request):  1% (1m) / 60%
+Min replicas:                                          1
+Max replicas:                                          4
+Deployment pods:                                       1 current / 1 desired
+Conditions:
+  Type            Status  Reason              Message
+  ----            ------  ------              -------
+  AbleToScale     True    ReadyForNewScale    recommended size matches current size
+  ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
+  ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
+Events:
+  Type     Reason                   Age                      From                       Message
+  ----     ------                   ----                     ----                       -------
+  Warning  FailedGetResourceMetric  8m59s (x801 over 3h29m)  horizontal-pod-autoscaler  failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server could not find the requested resource (get pods.metrics.k8s.io)
+  Warning  FailedGetResourceMetric  3m59s (x4 over 4m44s)    horizontal-pod-autoscaler  failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)
+  Normal   SuccessfulRescale        43s                      horizontal-pod-autoscaler  New size: 1; reason: All metrics below target

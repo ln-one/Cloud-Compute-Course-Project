@@ -1,0 +1,28 @@
+## kubectl get nodes -o wide
+NAME            STATUS   ROLES    AGE     VERSION              INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+192.168.0.113   Ready    <none>   3h40m   v1.34.6-r0-34.0.23   192.168.0.113   <none>        Ubuntu 22.04.5 LTS   5.15.0-173-generic   containerd://1.7.29-19-g707eaa844
+192.168.0.214   Ready    <none>   3h40m   v1.34.6-r0-34.0.23   192.168.0.214   <none>        Ubuntu 22.04.5 LTS   5.15.0-173-generic   containerd://1.7.29-19-g707eaa844
+
+## kubectl get pods -o wide
+NAME                       READY   STATUS             RESTARTS   AGE    IP           NODE            NOMINATED NODE   READINESS GATES
+backend-565cdb9598-9bg5h   0/1     ImagePullBackOff   0          144m   10.0.0.132   192.168.0.113   <none>           <none>
+backend-565cdb9598-l4wzg   0/1     ImagePullBackOff   0          144m   10.0.0.4     192.168.0.214   <none>           <none>
+backend-5745bb759d-5f4cb   0/1     ImagePullBackOff   0          143m   10.0.0.6     192.168.0.214   <none>           <none>
+frontend-7b78f5d7-x6rp8    0/1     ImagePullBackOff   0          144m   10.0.0.5     192.168.0.214   <none>           <none>
+frontend-8999759-2lw42     0/1     ImagePullBackOff   0          143m   10.0.0.134   192.168.0.113   <none>           <none>
+redis-ff6998b77-nbpzb      1/1     Running            0          144m   10.0.0.133   192.168.0.113   <none>           <none>
+
+## kubectl get pvc
+NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+redis-data-pvc   Bound    pvc-d42fe278-c5a7-43ec-9792-d10ea948f19f   10Gi       RWO            csi-disk       <unset>                 144m
+
+## kubectl get svc
+NAME           TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+backend-svc    LoadBalancer   10.247.247.213   <pending>     80:31794/TCP   144m
+frontend-svc   LoadBalancer   10.247.82.221    <pending>     80:32058/TCP   144m
+kubernetes     ClusterIP      10.247.0.1       <none>        443/TCP        3h50m
+redis-svc      ClusterIP      10.247.4.192     <none>        6379/TCP       144m
+
+## kubectl get hpa
+NAME          REFERENCE            TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: <unknown>/60%   1         4         2          144m

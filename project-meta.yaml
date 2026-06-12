@@ -1,0 +1,36 @@
+student:
+  id: "2023112573"
+  name: "张春冉"
+  class: "软件工程2023-02班"
+  teammates:
+    - id: "2023112551"
+      name: "邓苏鑫"
+      contribution: ""
+
+cloud:
+  region: "cn-north-4"
+  swr_org: "cloud-compute-2026"
+  cce_cluster_name: "cloud-compute-cce"
+  cce_kubeconfig_path: ""
+  cce_version: "v1.34.6-r0-34.0.23"
+  node_spec: "t6.large.2 2vCPU/4GiB x2, Ubuntu 22.04.5 LTS, containerd 1.7.29"
+
+project:
+  second_part: "MPI"
+  mpi_topic: "numerical_integration"
+  frontend_display_name: "2023112573 张春冉"
+  redis_password_placeholder: "cloudcompute2026"
+
+images:
+  backend: ""
+  frontend: ""
+  mpi4py: ""
+
+course_assets:
+  mpi_operator_yaml_path: ""
+  spark_operator_chart_path: ""
+  pyspark_image: ""
+  obs_dataset_path: ""
+
+repo:
+  github_or_gitee_url: ""

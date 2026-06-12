@@ -1,0 +1,25 @@
+# final cluster state
+Fri Jun 12 21:02:07 CST 2026
+
+NAME            STATUS   ROLES    AGE     VERSION              INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+192.168.0.113   Ready    <none>   5h20m   v1.34.6-r0-34.0.23   192.168.0.113   <none>        Ubuntu 22.04.5 LTS   5.15.0-173-generic   containerd://1.7.29-19-g707eaa844
+192.168.0.214   Ready    <none>   5h21m   v1.34.6-r0-34.0.23   192.168.0.214   <none>        Ubuntu 22.04.5 LTS   5.15.0-173-generic   containerd://1.7.29-19-g707eaa844
+
+NAME                          READY   STATUS      RESTARTS      AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+backend-97b4d5c4-drp84        1/1     Running     1 (37m ago)   93m   10.0.0.8     192.168.0.214   <none>           <none>
+frontend-658dcb676-2dgdj      1/1     Running     0             85m   10.0.0.9     192.168.0.214   <none>           <none>
+mpi-integral-launcher-7mrmc   0/1     Completed   0             35s   10.0.0.149   192.168.0.113   <none>           <none>
+redis-ff6998b77-vjdxt         1/1     Running     0             38m   10.0.0.11    192.168.0.214   <none>           <none>
+
+NAME           TYPE           CLUSTER-IP       EXTERNAL-IP                   PORT(S)        AGE
+backend-svc    LoadBalancer   10.247.184.108   1.92.103.90,192.168.0.152     80:32080/TCP   88m
+frontend-svc   LoadBalancer   10.247.127.61    119.3.252.161,192.168.0.189   80:30631/TCP   88m
+kubernetes     ClusterIP      10.247.0.1       <none>                        443/TCP        5h30m
+mpi-integral   ClusterIP      None             <none>                        <none>         37s
+redis-svc      ClusterIP      10.247.4.192     <none>                        6379/TCP       4h4m
+
+NAME          REFERENCE            TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: 1%/60%   1         4         1          4h4m
+
+NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+redis-data-pvc   Bound    pvc-d42fe278-c5a7-43ec-9792-d10ea948f19f   10Gi       RWO            csi-disk       <unset>                 4h4m

@@ -1,0 +1,106 @@
+# MPIJob cloud run after scatter implementation
+Fri Jun 12 21:15:24 CST 2026
+mpijob.kubeflow.org "mpi-integral" deleted
+mpijob.kubeflow.org/mpi-integral created
+--- sample 1 21:15:25 ---
+NAME                    READY   STATUS              RESTARTS   AGE   IP       NODE            NOMINATED NODE   READINESS GATES
+mpi-integral-worker-0   0/1     ContainerCreating   0          1s    <none>   192.168.0.214   <none>           <none>
+mpi-integral-worker-1   0/1     ContainerCreating   0          0s    <none>   192.168.0.113   <none>           <none>
+Created {"Worker":{}}
+--- sample 2 21:15:31 ---
+NAME                          READY   STATUS    RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-integral-launcher-frclx   1/1     Running   0          4s    10.0.0.175   192.168.0.113   <none>           <none>
+mpi-integral-worker-0         1/1     Running   0          7s    10.0.0.32    192.168.0.214   <none>           <none>
+mpi-integral-worker-1         1/1     Running   0          6s    10.0.0.174   192.168.0.113   <none>           <none>
+Created Running {"Launcher":{"active":1},"Worker":{"active":2}}
+--- sample 3 21:15:37 ---
+NAME                          READY   STATUS        RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+mpi-integral-launcher-frclx   0/1     Completed     0          10s   10.0.0.175   192.168.0.113   <none>           <none>
+mpi-integral-worker-0         1/1     Terminating   0          13s   10.0.0.32    192.168.0.214   <none>           <none>
+mpi-integral-worker-1         1/1     Terminating   0          12s   10.0.0.174   192.168.0.113   <none>           <none>
+Created Running Succeeded {"Launcher":{"succeeded":1},"Worker":{}}
+--- launcher logs ---
+Warning: Permanently added 'mpi-integral-worker-0.mpi-integral.default.svc' (ED25519) to the list of known hosts.
+Warning: Permanently added 'mpi-integral-worker-1.mpi-integral.default.svc' (ED25519) to the list of known hosts.
+mpi_blocking p=4 n=10000000 pi=3.1415926536 time=3.899978s error=1.234568e-13
+--- mpijob status ---
+              --hostfile
+              /etc/mpi/hostfile
+              --map-by
+              slot
+              --mca
+              plm_rsh_args
+              -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectionAttempts=10
+              -n
+              4
+              python
+              /opt/mpi/integral_mpi.py
+              10000000
+            Env:
+              Name:   OMPI_ALLOW_RUN_AS_ROOT
+              Value:  1
+              Name:   OMPI_ALLOW_RUN_AS_ROOT_CONFIRM
+              Value:  1
+            Image:    swr.cn-north-4.myhuaweicloud.com/cloud-compute-2026/mpi4py:latest
+            Name:     launcher
+          Image Pull Secrets:
+            Name:  default-secret
+    Worker:
+      Replicas:  2
+      Template:
+        Spec:
+          Containers:
+            Env:
+              Name:   OMPI_ALLOW_RUN_AS_ROOT
+              Value:  1
+              Name:   OMPI_ALLOW_RUN_AS_ROOT_CONFIRM
+              Value:  1
+            Image:    swr.cn-north-4.myhuaweicloud.com/cloud-compute-2026/mpi4py:latest
+            Name:     worker
+            Resources:
+              Limits:
+                Cpu:     500m
+                Memory:  512Mi
+              Requests:
+                Cpu:     100m
+                Memory:  256Mi
+          Image Pull Secrets:
+            Name:          default-secret
+  Run Launcher As Worker:  false
+  Run Policy:
+    Clean Pod Policy:   Running
+    Suspend:            false
+  Slots Per Worker:     2
+  Ssh Auth Mount Path:  /root/.ssh
+Status:
+  Completion Time:  2026-06-12T13:15:37Z
+  Conditions:
+    Last Transition Time:  2026-06-12T13:15:25Z
+    Last Update Time:      2026-06-12T13:15:25Z
+    Message:               MPIJob default/mpi-integral is created.
+    Reason:                MPIJobCreated
+    Status:                True
+    Type:                  Created
+    Last Transition Time:  2026-06-12T13:15:29Z
+    Last Update Time:      2026-06-12T13:15:29Z
+    Message:               MPIJob default/mpi-integral is running.
+    Reason:                MPIJobRunning
+    Status:                False
+    Type:                  Running
+    Last Transition Time:  2026-06-12T13:15:37Z
+    Last Update Time:      2026-06-12T13:15:37Z
+    Message:               MPIJob default/mpi-integral successfully completed.
+    Reason:                MPIJobSucceeded
+    Status:                True
+    Type:                  Succeeded
+  Replica Statuses:
+    Launcher:
+      Succeeded:  1
+    Worker:
+  Start Time:  2026-06-12T13:15:25Z
+Events:
+  Type    Reason           Age                From                Message
+  ----    ------           ----               ----                -------
+  Normal  MPIJobCreated    13s (x2 over 14s)  mpi-job-controller  MPIJob default/mpi-integral is created.
+  Normal  MPIJobRunning    3s (x5 over 10s)   mpi-job-controller  MPIJob default/mpi-integral is running
+  Normal  MPIJobSucceeded  2s                 mpi-job-controller  MPIJob default/mpi-integral successfully completed.

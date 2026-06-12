@@ -1,0 +1,14 @@
+## local unit test
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.199s
+
+OK
+
+## backend public API
+{"redis":"connected","status":"ok","student":"2023112573 \u5f20\u6625\u5189","time":"2026-06-12T11:45:45.979192+00:00"}
+
+
+## frontend public API proxy
+{"redis":"connected","status":"ok","student":"2023112573 \u5f20\u6625\u5189","time":"2026-06-12T11:45:46.130742+00:00"}
+

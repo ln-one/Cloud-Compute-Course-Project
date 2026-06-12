@@ -1,0 +1,56 @@
+## MPIJob submit and watch
+Fri Jun 12 20:49:00 CST 2026
+mpijob.kubeflow.org/mpi-integral created
+
+## mpijob
+NAME           AGE
+mpi-integral   0s
+
+
+## sample 1
+NAME                          READY   STATUS              RESTARTS   AGE   IP       NODE            NOMINATED NODE   READINESS GATES
+mpi-integral-launcher-6xqqd   0/1     ContainerCreating   0          0s    <none>   192.168.0.214   <none>           <none>
+mpi-integral-worker-0         0/1     Pending             0          0s    <none>   <none>          <none>           <none>
+mpi-integral-worker-1         0/1     Pending             0          0s    <none>   <none>          <none>           <none>
+NAME           AGE
+mpi-integral   1s
+
+## sample 2
+NAME                          READY   STATUS             RESTARTS     AGE   IP          NODE            NOMINATED NODE   READINESS GATES
+mpi-integral-launcher-6xqqd   0/1     CrashLoopBackOff   1 (4s ago)   16s   10.0.0.13   192.168.0.214   <none>           <none>
+mpi-integral-worker-0         0/1     Pending            0            16s   <none>      <none>          <none>           <none>
+mpi-integral-worker-1         0/1     Pending            0            16s   <none>      <none>          <none>           <none>
+NAME           AGE
+mpi-integral   16s
+
+## sample 3
+NAME                          READY   STATUS    RESTARTS      AGE   IP          NODE            NOMINATED NODE   READINESS GATES
+mpi-integral-launcher-6xqqd   0/1     Error     2 (20s ago)   32s   10.0.0.13   192.168.0.214   <none>           <none>
+mpi-integral-worker-0         0/1     Pending   0             32s   <none>      <none>          <none>           <none>
+mpi-integral-worker-1         0/1     Pending   0             32s   <none>      <none>          <none>           <none>
+NAME           AGE
+mpi-integral   32s
+
+## sample 4
+NAME                          READY   STATUS             RESTARTS      AGE   IP          NODE            NOMINATED NODE   READINESS GATES
+mpi-integral-launcher-6xqqd   0/1     CrashLoopBackOff   2 (21s ago)   47s   10.0.0.13   192.168.0.214   <none>           <none>
+mpi-integral-worker-0         0/1     Pending            0             47s   <none>      <none>          <none>           <none>
+mpi-integral-worker-1         0/1     Pending            0             47s   <none>      <none>          <none>           <none>
+NAME           AGE
+mpi-integral   48s
+
+## sample 5
+NAME                          READY   STATUS    RESTARTS      AGE   IP          NODE            NOMINATED NODE   READINESS GATES
+mpi-integral-launcher-6xqqd   0/1     Error     3 (37s ago)   63s   10.0.0.13   192.168.0.214   <none>           <none>
+mpi-integral-worker-0         0/1     Pending   0             63s   <none>      <none>          <none>           <none>
+mpi-integral-worker-1         0/1     Pending   0             63s   <none>      <none>          <none>           <none>
+NAME           AGE
+mpi-integral   63s
+
+## sample 6
+NAME                          READY   STATUS             RESTARTS      AGE   IP          NODE            NOMINATED NODE   READINESS GATES
+mpi-integral-launcher-6xqqd   0/1     CrashLoopBackOff   3 (25s ago)   79s   10.0.0.13   192.168.0.214   <none>           <none>
+mpi-integral-worker-0         0/1     Pending            0             79s   <none>      <none>          <none>           <none>
+mpi-integral-worker-1         0/1     Pending            0             79s   <none>      <none>          <none>           <none>
+NAME           AGE
+mpi-integral   79s

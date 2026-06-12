@@ -1,0 +1,130 @@
+## HPA scale-up watch
+Fri Jun 12 20:26:47 CST 2026
+
+## sample 1
+NAME          REFERENCE            TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: 1%/60%   1         4         1          3h29m
+NAME                     READY   STATUS    RESTARTS       AGE
+backend-97b4d5c4-drp84   1/1     Running   1 (104s ago)   58m
+NAME                     CPU(cores)   MEMORY(bytes)   
+backend-97b4d5c4-drp84   1m           34Mi            
+
+## sample 2
+NAME          REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: 244%/60%   1         4         1          3h29m
+NAME                     READY   STATUS              RESTARTS       AGE
+backend-97b4d5c4-cctxc   0/1     ContainerCreating   0              1s
+backend-97b4d5c4-drp84   1/1     Running             1 (2m5s ago)   58m
+backend-97b4d5c4-v9kxn   1/1     Running             0              1s
+backend-97b4d5c4-xfj6l   0/1     ContainerCreating   0              1s
+NAME                     CPU(cores)   MEMORY(bytes)   
+backend-97b4d5c4-drp84   244m         42Mi            
+
+## sample 3
+NAME          REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: 499%/60%   1         4         4          3h30m
+NAME                     READY   STATUS    RESTARTS        AGE
+backend-97b4d5c4-cctxc   1/1     Running   0               22s
+backend-97b4d5c4-drp84   1/1     Running   1 (2m26s ago)   58m
+backend-97b4d5c4-v9kxn   1/1     Running   0               22s
+backend-97b4d5c4-xfj6l   1/1     Running   0               22s
+NAME                     CPU(cores)   MEMORY(bytes)   
+backend-97b4d5c4-drp84   499m         42Mi            
+
+## sample 4
+NAME          REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: 126%/60%   1         4         4          3h30m
+NAME                     READY   STATUS    RESTARTS        AGE
+backend-97b4d5c4-cctxc   1/1     Running   0               44s
+backend-97b4d5c4-drp84   1/1     Running   1 (2m48s ago)   59m
+backend-97b4d5c4-v9kxn   1/1     Running   0               44s
+backend-97b4d5c4-xfj6l   1/1     Running   0               44s
+NAME                     CPU(cores)   MEMORY(bytes)   
+backend-97b4d5c4-cctxc   1m           34Mi            
+backend-97b4d5c4-drp84   500m         42Mi            
+backend-97b4d5c4-v9kxn   1m           34Mi            
+backend-97b4d5c4-xfj6l   1m           34Mi            
+
+## sample 5
+NAME          REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: 125%/60%   1         4         4          3h30m
+NAME                     READY   STATUS    RESTARTS       AGE
+backend-97b4d5c4-cctxc   1/1     Running   0              65s
+backend-97b4d5c4-drp84   1/1     Running   1 (3m9s ago)   59m
+backend-97b4d5c4-v9kxn   1/1     Running   0              65s
+backend-97b4d5c4-xfj6l   1/1     Running   0              65s
+NAME                     CPU(cores)   MEMORY(bytes)   
+backend-97b4d5c4-cctxc   1m           34Mi            
+backend-97b4d5c4-drp84   500m         42Mi            
+backend-97b4d5c4-v9kxn   1m           34Mi            
+backend-97b4d5c4-xfj6l   1m           34Mi            
+
+## sample 6
+NAME          REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: 125%/60%   1         4         4          3h31m
+NAME                     READY   STATUS    RESTARTS        AGE
+backend-97b4d5c4-cctxc   1/1     Running   0               86s
+backend-97b4d5c4-drp84   1/1     Running   1 (3m30s ago)   60m
+backend-97b4d5c4-v9kxn   1/1     Running   0               86s
+backend-97b4d5c4-xfj6l   1/1     Running   0               86s
+NAME                     CPU(cores)   MEMORY(bytes)   
+backend-97b4d5c4-cctxc   1m           34Mi            
+backend-97b4d5c4-drp84   501m         42Mi            
+backend-97b4d5c4-v9kxn   1m           34Mi            
+backend-97b4d5c4-xfj6l   1m           34Mi            
+
+## sample 7
+NAME          REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: 126%/60%   1         4         4          3h31m
+NAME                     READY   STATUS    RESTARTS        AGE
+backend-97b4d5c4-cctxc   1/1     Running   0               107s
+backend-97b4d5c4-drp84   1/1     Running   1 (3m51s ago)   60m
+backend-97b4d5c4-v9kxn   1/1     Running   0               107s
+backend-97b4d5c4-xfj6l   1/1     Running   0               107s
+NAME                     CPU(cores)   MEMORY(bytes)   
+backend-97b4d5c4-cctxc   1m           34Mi            
+backend-97b4d5c4-drp84   501m         42Mi            
+backend-97b4d5c4-v9kxn   1m           34Mi            
+backend-97b4d5c4-xfj6l   1m           34Mi            
+
+## sample 8
+NAME          REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: 125%/60%   1         4         4          3h31m
+NAME                     READY   STATUS    RESTARTS        AGE
+backend-97b4d5c4-cctxc   1/1     Running   0               2m8s
+backend-97b4d5c4-drp84   1/1     Running   1 (4m12s ago)   60m
+backend-97b4d5c4-v9kxn   1/1     Running   0               2m8s
+backend-97b4d5c4-xfj6l   1/1     Running   0               2m8s
+NAME                     CPU(cores)   MEMORY(bytes)   
+backend-97b4d5c4-cctxc   1m           34Mi            
+backend-97b4d5c4-drp84   500m         42Mi            
+backend-97b4d5c4-v9kxn   1m           34Mi            
+backend-97b4d5c4-xfj6l   1m           34Mi            
+
+## sample 9
+NAME          REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: 125%/60%   1         4         4          3h32m
+NAME                     READY   STATUS    RESTARTS        AGE
+backend-97b4d5c4-cctxc   1/1     Running   0               2m29s
+backend-97b4d5c4-drp84   1/1     Running   1 (4m33s ago)   61m
+backend-97b4d5c4-v9kxn   1/1     Running   0               2m29s
+backend-97b4d5c4-xfj6l   1/1     Running   0               2m29s
+NAME                     CPU(cores)   MEMORY(bytes)   
+backend-97b4d5c4-cctxc   1m           34Mi            
+backend-97b4d5c4-drp84   500m         42Mi            
+backend-97b4d5c4-v9kxn   1m           34Mi            
+backend-97b4d5c4-xfj6l   1m           34Mi            
+
+## sample 10
+NAME          REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: 126%/60%   1         4         4          3h32m
+NAME                     READY   STATUS    RESTARTS        AGE
+backend-97b4d5c4-cctxc   1/1     Running   0               2m51s
+backend-97b4d5c4-drp84   1/1     Running   1 (4m55s ago)   61m
+backend-97b4d5c4-v9kxn   1/1     Running   0               2m51s
+backend-97b4d5c4-xfj6l   1/1     Running   0               2m51s
+NAME                     CPU(cores)   MEMORY(bytes)   
+backend-97b4d5c4-cctxc   1m           34Mi            
+backend-97b4d5c4-drp84   501m         42Mi            
+backend-97b4d5c4-v9kxn   1m           34Mi            
+backend-97b4d5c4-xfj6l   1m           34Mi            

@@ -1,0 +1,57 @@
+name: Build and deploy to Huawei CCE
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+env:
+  SWR_REGISTRY: swr.cn-north-4.myhuaweicloud.com
+  SWR_NAMESPACE: cloud-compute-2026
+  BACKEND_IMAGE: backend
+  FRONTEND_IMAGE: frontend
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set image tag
+        run: echo "IMAGE_TAG=${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+
+      - name: Login to Huawei SWR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.SWR_REGISTRY }}
+          username: ${{ secrets.SWR_USERNAME }}
+          password: ${{ secrets.SWR_PASSWORD }}
+
+      - name: Build and push backend image
+        run: |
+          docker build -t "$SWR_REGISTRY/$SWR_NAMESPACE/$BACKEND_IMAGE:$IMAGE_TAG" ./backend
+          docker push "$SWR_REGISTRY/$SWR_NAMESPACE/$BACKEND_IMAGE:$IMAGE_TAG"
+
+      - name: Build and push frontend image
+        run: |
+          docker build -t "$SWR_REGISTRY/$SWR_NAMESPACE/$FRONTEND_IMAGE:$IMAGE_TAG" ./frontend
+          docker push "$SWR_REGISTRY/$SWR_NAMESPACE/$FRONTEND_IMAGE:$IMAGE_TAG"
+
+      - name: Configure kubectl
+        run: |
+          mkdir -p "$HOME/.kube"
+          echo "${{ secrets.CCE_KUBECONFIG_B64 }}" | base64 -d > "$HOME/.kube/config"
+          kubectl version --client
+          kubectl get nodes
+
+      - name: Update CCE deployments
+        run: |
+          kubectl set image deployment/backend backend="$SWR_REGISTRY/$SWR_NAMESPACE/$BACKEND_IMAGE:$IMAGE_TAG"
+          kubectl set image deployment/frontend frontend="$SWR_REGISTRY/$SWR_NAMESPACE/$FRONTEND_IMAGE:$IMAGE_TAG"
+          kubectl rollout status deployment/backend --timeout=180s
+          kubectl rollout status deployment/frontend --timeout=180s
+          kubectl get deployment backend frontend -o wide

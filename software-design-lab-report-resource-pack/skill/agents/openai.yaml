@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software Design Lab Report"
+  short_description: "Build pattern lab reports."
+  default_prompt: "Create a complete Chinese software design pattern lab report with runnable code, Mermaid/UML diagrams, screenshots, and a DOCX matching my coursework style."

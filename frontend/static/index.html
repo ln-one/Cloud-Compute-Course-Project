@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloud Computing Course Project</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+    }
+    main {
+      max-width: 760px;
+      margin: 72px auto;
+      padding: 32px;
+      background: #fff;
+      border: 1px solid #e5e9f0;
+      border-radius: 8px;
+    }
+    h1 { margin-top: 0; font-size: 28px; }
+    code { background: #eef2f7; padding: 2px 6px; border-radius: 4px; }
+    button {
+      padding: 10px 16px;
+      border: 0;
+      border-radius: 6px;
+      background: #1769e0;
+      color: white;
+      cursor: pointer;
+    }
+    pre {
+      min-height: 48px;
+      padding: 12px;
+      background: #111827;
+      color: #d1fae5;
+      border-radius: 6px;
+      overflow: auto;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>云计算技术课程设计</h1>
+    <p>学生：<strong>2023112573 张春冉</strong></p>
+    <p>队友：<strong>2023112551 邓苏鑫</strong></p>
+    <p>架构：<code>Nginx + Flask API + Redis</code></p>
+    <button id="ping">调用 /api/ping</button>
+    <pre id="output">等待请求...</pre>
+  </main>
+  <script>
+    document.getElementById("ping").addEventListener("click", async () => {
+      const out = document.getElementById("output");
+      out.textContent = "请求中...";
+      const res = await fetch("/api/ping");
+      out.textContent = JSON.stringify(await res.json(), null, 2);
+    });
+  </script>
+</body>
+</html>
+

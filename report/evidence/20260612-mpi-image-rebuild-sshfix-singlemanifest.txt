@@ -1,0 +1,50 @@
+# MPI image rebuild with ssh fix, single manifest push
+Fri Jun 12 21:00:38 CST 2026
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 877B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.12-slim
+#2 DONE 0.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 122B done
+#4 DONE 0.0s
+
+#5 [1/4] FROM docker.io/library/python:3.12-slim@sha256:401f6e1a67dad31a1bd78e9ad22d0ee0a3b52154e6bd30e90be696bb6a3d7461
+#5 resolve docker.io/library/python:3.12-slim@sha256:401f6e1a67dad31a1bd78e9ad22d0ee0a3b52154e6bd30e90be696bb6a3d7461 done
+#5 DONE 0.0s
+
+#6 [2/4] RUN apt-get update     && apt-get install -y --no-install-recommends openmpi-bin libopenmpi-dev openssh-server build-essential     && pip install --no-cache-dir mpi4py     && mkdir -p /run/sshd     && sed -i 's/^#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config     && sed -i 's/^#PubkeyAuthentication.*/PubkeyAuthentication yes/' /etc/ssh/sshd_config     && sed -i 's/^#StrictModes.*/StrictModes no/' /etc/ssh/sshd_config     && apt-get purge -y --auto-remove build-essential     && rm -rf /var/lib/apt/lists/*
+#6 CACHED
+
+#7 [3/4] WORKDIR /opt/mpi
+#7 CACHED
+
+#8 [4/4] COPY integral_serial.py integral_mpi.py integral_mpi_nonblocking.py /opt/mpi/
+#8 CACHED
+
+#9 exporting to image
+#9 exporting layers done
+#9 exporting manifest sha256:da058f01218928285ed16f54a9fde94f35e79f037b19ccd12480ae898240c3ba done
+#9 exporting config sha256:aa64e7c0848fe638f56e4a7c98d255778b40484b9acdda7c3799d9d31e466108 done
+#9 naming to swr.cn-north-4.myhuaweicloud.com/cloud-compute-2026/mpi4py:latest done
+#9 pushing layers
+#9 ...
+
+#10 [auth] cloud-compute-2026/mpi4py:,pull,push token for swr.cn-north-4.myhuaweicloud.com
+#10 DONE 0.0s
+
+#9 exporting to image
+#9 pushing layers 1.4s done
+#9 pushing manifest for swr.cn-north-4.myhuaweicloud.com/cloud-compute-2026/mpi4py:latest@sha256:da058f01218928285ed16f54a9fde94f35e79f037b19ccd12480ae898240c3ba
+#9 pushing manifest for swr.cn-north-4.myhuaweicloud.com/cloud-compute-2026/mpi4py:latest@sha256:da058f01218928285ed16f54a9fde94f35e79f037b19ccd12480ae898240c3ba 0.2s done
+#9 DONE 1.7s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/k5pajtf1pamx59e2j3g3mr2b3

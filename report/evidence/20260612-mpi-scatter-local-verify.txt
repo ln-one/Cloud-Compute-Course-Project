@@ -1,0 +1,6 @@
+# MPI scatter code local verification using mounted source
+Fri Jun 12 21:15:01 CST 2026
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_blocking p=4 n=1000000 pi=3.1415926536 time=0.066943s error=8.215650e-14
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_nonblocking p=4 n=1000000 pi=3.1415926536 time=0.067293s error=8.260059e-14

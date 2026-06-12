@@ -1,0 +1,50 @@
+# MPI performance local container runs
+Fri Jun 12 21:09:56 CST 2026
+image=swr.cn-north-4.myhuaweicloud.com/cloud-compute-2026/mpi4py:latest
+n=10000000
+
+--- serial run 1 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+serial n=10000000 pi=3.1415926536 time=1.069915s error=6.217249e-14
+--- serial run 2 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+serial n=10000000 pi=3.1415926536 time=1.074320s error=6.217249e-14
+--- serial run 3 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+serial n=10000000 pi=3.1415926536 time=1.080859s error=6.217249e-14
+--- blocking p=1 run 1 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_blocking p=1 n=10000000 pi=3.1415926536 time=1.858161s error=6.217249e-14
+--- blocking p=1 run 2 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_blocking p=1 n=10000000 pi=3.1415926536 time=1.787452s error=6.217249e-14
+--- blocking p=1 run 3 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_blocking p=1 n=10000000 pi=3.1415926536 time=1.820816s error=6.217249e-14
+--- blocking p=2 run 1 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_blocking p=2 n=10000000 pi=3.1415926536 time=1.043620s error=1.296740e-13
+--- blocking p=2 run 2 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_blocking p=2 n=10000000 pi=3.1415926536 time=1.031564s error=1.296740e-13
+--- blocking p=2 run 3 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_blocking p=2 n=10000000 pi=3.1415926536 time=1.072588s error=1.296740e-13
+--- blocking p=4 run 1 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_blocking p=4 n=10000000 pi=3.1415926536 time=0.643803s error=1.234568e-13
+--- blocking p=4 run 2 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_blocking p=4 n=10000000 pi=3.1415926536 time=0.621223s error=1.234568e-13
+--- blocking p=4 run 3 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_blocking p=4 n=10000000 pi=3.1415926536 time=0.539544s error=1.234568e-13
+--- nonblocking p=4 run 1 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_nonblocking p=4 n=10000000 pi=3.1415926536 time=0.629397s error=1.234568e-13
+--- nonblocking p=4 run 2 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_nonblocking p=4 n=10000000 pi=3.1415926536 time=0.616625s error=1.234568e-13
+--- nonblocking p=4 run 3 ---
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+mpi_nonblocking p=4 n=10000000 pi=3.1415926536 time=0.631660s error=1.234568e-13

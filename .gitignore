@@ -1,0 +1,16 @@
+.env
+__pycache__/
+*.pyc
+.DS_Store
+screenshots/
+tmp/
+.venv/
+.codegraph/
+.playwright-cli/
+kubeconfig/
+CompoundBreaker/
+report/~$*
+report/evidence/ghostty-*.sh
+output/doc/report/
+*.key
+*.cert

@@ -1,0 +1,22 @@
+## redis persistence verification
+Fri Jun 12 20:23:59 CST 2026
+
+## pvc before
+NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE     VOLUMEMODE
+redis-data-pvc   Bound    pvc-d42fe278-c5a7-43ec-9792-d10ea948f19f   10Gi       RWO            csi-disk       <unset>                 3h26m   Filesystem
+
+## current redis pod: redis-ff6998b77-nbpzb
+## write testkey
+OK
+## read testkey before delete
+hello
+
+## delete redis pod
+pod "redis-ff6998b77-nbpzb" deleted
+## wait new redis pod ready
+pod/redis-ff6998b77-vjdxt condition met
+## new redis pod: redis-ff6998b77-vjdxt
+NAME                    READY   STATUS    RESTARTS   AGE   IP          NODE            NOMINATED NODE   READINESS GATES
+redis-ff6998b77-vjdxt   1/1     Running   0          45s   10.0.0.11   192.168.0.214   <none>           <none>
+## read testkey after recreate
+hello

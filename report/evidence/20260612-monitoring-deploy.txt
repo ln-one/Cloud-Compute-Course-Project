@@ -1,0 +1,40 @@
+# monitoring deploy status
+Fri Jun 12 21:21:01 CST 2026
+--- sample 1 21:21:01 ---
+NAME                         READY   STATUS              RESTARTS   AGE   IP       NODE            NOMINATED NODE   READINESS GATES
+grafana-c9dfbd6c8-f5gnj      0/1     ContainerCreating   0          14s   <none>   192.168.0.113   <none>           <none>
+prometheus-c4c45cd87-f54bq   0/1     ContainerCreating   0          15s   <none>   192.168.0.214   <none>           <none>
+--- sample 2 21:21:11 ---
+NAME                         READY   STATUS    RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+grafana-c9dfbd6c8-f5gnj      1/1     Running   0          25s   10.0.0.200   192.168.0.113   <none>           <none>
+prometheus-c4c45cd87-f54bq   1/1     Running   0          26s   10.0.0.45    192.168.0.214   <none>           <none>
+--- sample 3 21:21:21 ---
+NAME                         READY   STATUS    RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+grafana-c9dfbd6c8-f5gnj      1/1     Running   0          35s   10.0.0.200   192.168.0.113   <none>           <none>
+prometheus-c4c45cd87-f54bq   1/1     Running   0          36s   10.0.0.45    192.168.0.214   <none>           <none>
+--- sample 4 21:21:32 ---
+NAME                         READY   STATUS    RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+grafana-c9dfbd6c8-f5gnj      1/1     Running   0          45s   10.0.0.200   192.168.0.113   <none>           <none>
+prometheus-c4c45cd87-f54bq   1/1     Running   0          46s   10.0.0.45    192.168.0.214   <none>           <none>
+--- sample 5 21:21:42 ---
+NAME                         READY   STATUS    RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+grafana-c9dfbd6c8-f5gnj      1/1     Running   0          56s   10.0.0.200   192.168.0.113   <none>           <none>
+prometheus-c4c45cd87-f54bq   1/1     Running   0          57s   10.0.0.45    192.168.0.214   <none>           <none>
+--- sample 6 21:21:53 ---
+NAME                         READY   STATUS    RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+grafana-c9dfbd6c8-f5gnj      1/1     Running   0          66s   10.0.0.200   192.168.0.113   <none>           <none>
+prometheus-c4c45cd87-f54bq   1/1     Running   0          67s   10.0.0.45    192.168.0.214   <none>           <none>
+--- sample 7 21:22:03 ---
+NAME                         READY   STATUS    RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+grafana-c9dfbd6c8-f5gnj      1/1     Running   0          77s   10.0.0.200   192.168.0.113   <none>           <none>
+prometheus-c4c45cd87-f54bq   1/1     Running   0          78s   10.0.0.45    192.168.0.214   <none>           <none>
+--- services ---
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+grafana      ClusterIP   10.247.31.63    <none>        3000/TCP   99s
+prometheus   ClusterIP   10.247.177.79   <none>        9090/TCP   100s
+--- grafana/provisioning configmaps ---
+NAME                   DATA   AGE
+grafana-provisioning   2      100s
+grafana-dashboard      1      100s
+prometheus-config      1      101s
+--- prometheus targets local query via port-forward will be captured separately ---

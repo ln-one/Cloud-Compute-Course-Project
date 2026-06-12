@@ -1,0 +1,11 @@
+## install mpi-operator
+Fri Jun 12 20:47:42 CST 2026
+namespace/mpi-operator created
+serviceaccount/mpi-operator created
+clusterrole.rbac.authorization.k8s.io/kubeflow-mpijobs-admin created
+clusterrole.rbac.authorization.k8s.io/kubeflow-mpijobs-edit created
+clusterrole.rbac.authorization.k8s.io/kubeflow-mpijobs-view created
+clusterrole.rbac.authorization.k8s.io/mpi-operator created
+clusterrolebinding.rbac.authorization.k8s.io/mpi-operator created
+deployment.apps/mpi-operator created
+The CustomResourceDefinition "mpijobs.kubeflow.org" is invalid: metadata.annotations: Too long: may not be more than 262144 bytes
