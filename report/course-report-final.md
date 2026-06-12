@@ -234,17 +234,21 @@ Prometheus 的 Pull 模式是由服务端周期性向目标 endpoint 发起 HTTP
 
 ### 4.2 CI/CD 流水线
 
-附加题 2 编写了 `.github/workflows/deploy-cce.yml`。流水线在 push 或手动触发后执行：Checkout 源码、生成镜像 Tag、登录华为云 SWR、构建并推送 backend/frontend 镜像、写入 kubeconfig、执行 `kubectl set image` 更新 CCE Deployment，最后等待 rollout 完成并输出 Deployment 状态。敏感信息全部通过 GitHub Secrets 提供，包括 `SWR_USERNAME`、`SWR_PASSWORD` 和 `CCE_KUBECONFIG_B64`。
+附加题 2 编写并实际运行了 `.github/workflows/deploy-cce.yml`。流水线在 push 或手动触发后执行：Checkout 源码、生成镜像 Tag、登录华为云 SWR、构建并推送 backend/frontend 镜像、写入 kubeconfig、执行 `kubectl set image` 更新 CCE Deployment，最后等待 rollout 完成并输出 Deployment 状态。敏感信息全部通过 GitHub Secrets 提供，包括 `SWR_USERNAME`、`SWR_PASSWORD` 和 `CCE_KUBECONFIG_B64`。本项目远程仓库地址为 `https://github.com/ln-one/Cloud-Compute-Course-Project`，用于部署验证的流水线 Run ID 为 `27419440447`，提交短哈希为 `24dbcce`，运行结论为 success。
 
 ![图16 CI/CD 工作流文件校验](report/final-assets/14-cicd-workflow.png)
 
-持续集成强调每次代码提交后自动构建、测试和发现问题；持续部署是在集成通过后自动把新版本发布到目标环境。本项目的工作流把构建镜像和更新 CCE Deployment 串起来，属于端到端部署流水线。GitOps 的核心理念是把期望状态写入 Git 仓库，集群实际状态由自动化系统持续向 Git 中的声明式配置收敛。当前仓库已经具备流水线文件和命令校验，若绑定 GitHub 远程仓库并配置 Secrets，即可运行完整 Actions。
+![图17 GitHub Actions CI/CD 实际运行成功](report/final-assets/17-github-actions-passed.png)
+
+![图18 GitHub Actions 后 CCE Deployment 镜像更新](report/final-assets/18-cicd-deployment-updated.png)
+
+持续集成强调每次代码提交后自动构建、测试和发现问题；持续部署是在集成通过后自动把新版本发布到目标环境。本项目的工作流把构建镜像和更新 CCE Deployment 串起来，属于端到端部署流水线。GitOps 的核心理念是把期望状态写入 Git 仓库，集群实际状态由自动化系统持续向 Git 中的声明式配置收敛。本次实验中，push 到 `main` 分支后，GitHub Actions 自动构建两个镜像并推送到 SWR，然后把 CCE 中 backend 与 frontend 的镜像更新为 `24dbcce` 标签，Deployment 均完成 rollout。
 
 ### 4.3 前沿专题：边缘计算模拟 K3s + MQTT
 
 附加题 3 选择 C-2。实验用本地 Docker 运行 Mosquitto 模拟边缘节点上的 MQTT Broker，用 `sensor_publisher.py` 模拟边缘传感器，每 0.5 秒发布一次温度、湿度和时间戳。`cloud_mqtt_bridge.py` 作为云端桥接服务订阅 `edge/sensor/#` 主题，并通过 `kubectl port-forward svc/redis-svc 63790:6379` 将数据写入 CCE 集群中的 Redis。Redis 中保存两个结构：`edge:sensor:latest` 列表保存最近 20 条消息，`edge:sensor:last` 哈希保存最后一条消息。
 
-![图17 边缘 MQTT 数据写入 CCE Redis](report/final-assets/16-edge-mqtt-redis.png)
+![图19 边缘 MQTT 数据写入 CCE Redis](report/final-assets/16-edge-mqtt-redis.png)
 
 MQTT 适合边缘场景，主要原因是协议轻量、报文头小、发布订阅模型能降低设备与云端之间的耦合。传感器只需要把数据发布到主题，不需要知道云端 Redis、数据库或业务服务的位置。弱网环境下可通过 QoS 1 保证消息至少送达一次，但也要注意重复消息、离线缓存大小和网络恢复后的突发流量。本实验使用本地 Broker 模拟边缘节点，如果部署到真实 K3s，可以把 Mosquitto 作为边缘集群中的 Deployment，把桥接程序部署到云端 K8s。云边协同的主要挑战在于链路延迟、网络抖动、边缘节点资源有限以及安全认证。实际系统中应为 MQTT 开启用户名密码或证书认证，并在桥接端做去重和限流。
 
@@ -414,6 +418,7 @@ on:
   workflow_dispatch:
 
 env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   SWR_REGISTRY: swr.cn-north-4.myhuaweicloud.com
   SWR_NAMESPACE: cloud-compute-2026
   BACKEND_IMAGE: backend

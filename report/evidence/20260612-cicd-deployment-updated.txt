@@ -1,0 +1,15 @@
+# CCE deployment images after GitHub Actions
+2026-06-12 21:43:14 CST
+
+NAME       READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                                                                 SELECTOR
+backend    1/1     1            1           4h45m   backend      swr.cn-north-4.myhuaweicloud.com/cloud-compute-2026/backend:24dbcce    app=backend
+frontend   1/1     1            1           4h45m   frontend     swr.cn-north-4.myhuaweicloud.com/cloud-compute-2026/frontend:24dbcce   app=frontend
+
+NAME                          READY   STATUS      RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+backend-bd6f4d844-qxf9d       1/1     Running     0          54s   10.0.0.47    192.168.0.214   <none>           <none>
+frontend-5889d5b768-9wq44     1/1     Running     0          53s   10.0.0.48    192.168.0.214   <none>           <none>
+mpi-integral-launcher-frclx   0/1     Completed   0          27m   10.0.0.175   192.168.0.113   <none>           <none>
+redis-ff6998b77-vjdxt         1/1     Running     0          79m   10.0.0.11    192.168.0.214   <none>           <none>
+
+NAME          REFERENCE            TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+backend-hpa   Deployment/backend   cpu: 1%/60%   1         4         1          4h45m
